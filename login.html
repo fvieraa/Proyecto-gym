@@ -26,17 +26,17 @@
         <div class="card m-auto" style="width: 50%;">
             <div class="card-header">
                 Inciar Sesion
-              </div>
+            </div>
             <form class="card-body">
                 <div class="form-group">
                     <label for="">Usuario</label>
-                    <input type="text" class="form-control" id="" aria-describedby="emailHelp">
+                    <input id="loginUsuario" type="text" class="form-control" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="">
+                    <input id="loginPassword" type="password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                <button type="submit" onclick="logeo()" class="btn btn-primary btn-lg btn-block">Ingresar</button>
             </form>
         </div>
     </div>
@@ -45,35 +45,41 @@
         <div class="footer-contacto col-4">
             <h1>Contacto</h1>
             <hr>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit quam dolores deserunt optio iure consequatur? Minus vero nesciunt harum laborum! Nulla exercitationem itaque officiis temporibus ducimus dolor cum incidunt.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate impedit quam dolores deserunt optio
+                iure consequatur? Minus vero nesciunt harum laborum! Nulla exercitationem itaque officiis temporibus
+                ducimus dolor cum incidunt.</p>
 
         </div>
         <div class="footer-movil col-4">
             <h1>Nuestra App</h1>
             <hr>
-            
+
             <div class="row">
                 <div class="col-8">
                     <div class="pr-4">
-                        <img class="img-fluid" src="https://play.google.com/intl/es-419/badges/static/images/badges/es-419_badge_web_generic.png" alt="">
-                    </div>                    
+                        <img class="img-fluid"
+                            src="https://play.google.com/intl/es-419/badges/static/images/badges/es-419_badge_web_generic.png"
+                            alt="">
+                    </div>
                     <div class="w-75 mx-2">
-                        <img class="img-fluid" src="https://leoconlula.files.wordpress.com/2017/04/app-store.png?w=540" alt="">
+                        <img class="img-fluid" src="https://leoconlula.files.wordpress.com/2017/04/app-store.png?w=540"
+                            alt="">
                     </div>
                 </div>
             </div>
 
-            
+
         </div>
         <div class="footer-nosotros col-4">
             <h1>Quienes Somos</h1>
             <hr>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores hic minima soluta voluptatum praesentium laborum facere neque aspernatur, mollitia placeat, nesciunt ipsa sint, enim labore? Est quos id assumenda quod.</p>
-
-
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores hic minima soluta voluptatum
+                praesentium laborum facere neque aspernatur, mollitia placeat, nesciunt ipsa sint, enim labore? Est quos
+                id assumenda quod.</p>
         </div>
 
     </footer>
+    <script src="/static/js/script.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
