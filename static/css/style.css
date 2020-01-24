@@ -1,4 +1,5 @@
 
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -23,7 +24,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #242424;
+    background: #248232;
     color: #fff;
     transition: all 0.3s;
 }
