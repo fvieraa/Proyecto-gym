@@ -50,17 +50,17 @@ function agregarUsuario() {
                 let usuarios = JSON.parse(localStorage.getItem('usuarios'));
                 let indexUsuario = usuarios.find(u => u.usuario == usuario.value)
                 let indexDni = usuarios.find(u => u.dni == dni.value)
-                
+
                 if (!indexUsuario) {
 
-                    if(!indexDni){
+                    if (!indexDni) {
 
-                        
+
                         usuarios.push(nuevoUsuario);
                         localStorage.setItem('usuarios', JSON.stringify(usuarios));
-                        
+
                         location.reload();
-                    }else{
+                    } else {
                         alert("dni ya registrado")
                     }
                 } else {
@@ -77,4 +77,35 @@ function agregarUsuario() {
     } else {
         alert("complete todos los campos")
     }
+}
+
+function listarUsuarios() {
+
+    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+    //Controlo si no tengo aún notas almacenadas
+    if (!usuarios) {
+        usuarios = [];
+    }
+
+    //Genero el contenido de la tabla
+    let tabla = "";
+    for (let index = 0; index < usuarios.length; index++) {
+        let usuario = usuarios[index];
+        tabla += '<tr><td>' + usuario.nombre + '</td><td>' + usuario.usuario + '</td><td>' + usuario.dni + '</td>';
+        tabla += `
+        <td class="center btn-group footable-visible footable-last-column">
+                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
+                                <a href="" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                    data-placement="top" title="" data-original-title="Borrar"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td></tr>
+        `
+
+    }
+
+    //Muestro el contenido de la tabla
+    document.getElementById('tablaUsuarios').innerHTML = tabla;
 }

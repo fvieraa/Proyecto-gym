@@ -88,16 +88,16 @@
                 <div>
 
                 </div>
-                <table class="table table-sm">
+                <table class="table table-sm" ">
                     <thead>
                         <tr>
-                            <th scope="col">Cod.</th>
                             <th scope="col">Nombre Completo</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">DNI</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tablaUsuarios">
                         <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>
@@ -166,11 +166,15 @@
                 </script>
             <script src="/static/js/script.js"></script>
             <script type="text/javascript">
+
+
                 $(document).ready(function () {
                     $('#sidebarCollapse').on('click', function () {
                         $('#sidebar').toggleClass('active');
                     });
                 });
+
+                listarUsuarios();
 
             </script>
 </body>
