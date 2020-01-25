@@ -47,7 +47,11 @@ function agregarUsuario() {
                     password.value
                 );
 
-                let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+                let usuarios = JSON.parse(localStorage.getItem('usuarios'))
+                if (!usuarios) {
+                    usuarios = []
+                };
+                console.log(usuarios)
                 let indexUsuario = usuarios.find(u => u.usuario == usuario.value)
                 let indexDni = usuarios.find(u => u.dni == dni.value)
 
@@ -58,8 +62,8 @@ function agregarUsuario() {
 
                         usuarios.push(nuevoUsuario);
                         localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
                         location.reload();
+
                     } else {
                         alert("dni ya registrado")
                     }
@@ -109,3 +113,5 @@ function listarUsuarios() {
     //Muestro el contenido de la tabla
     document.getElementById('tablaUsuarios').innerHTML = tabla;
 }
+
+
