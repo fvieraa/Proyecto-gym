@@ -2,6 +2,7 @@ class Usuario {
 
     constructor(nombre, dni, usuario, password) {
 
+
         this.nombre = nombre;
         this.dni = dni;
         this.usuario = usuario;
@@ -10,7 +11,8 @@ class Usuario {
 }
 
 class Clase {
-    constructor(nombre) {
+    constructor(id, nombre) {
+        this.id = id
         this.nombre = nombre;
     }
 }
@@ -98,14 +100,15 @@ function agregarClase() {
 
     if (nombre.value != "") {
 
-        let nuevaClase = new Clase(
-            nombre.value
-        );
 
         let clases = JSON.parse(localStorage.getItem('clases'))
         if (!clases) {
             clases = []
         };
+        let nuevaClase = new Clase(
+            id = clases.length + 1,
+            nombre.value
+        );
 
         let indexClase = clases.find(c => c.nombre == nombre.value)
 
@@ -137,12 +140,12 @@ function listarClases() {
     let tabla = "";
     for (let index = 0; index < clases.length; index++) {
         let clase = clases[index];
-        tabla += `<tr"><td>${clase.nombre}</td>`;
+        tabla += `<tr"><td id="clase${clase.id}">${clase.nombre}</td>`;
         tabla += `
         <td class="center btn-group footable-visible footable-last-column">
                                 <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="editarUsuario()" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                <a href="" onclick="editarClase(${clase.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
                                 <a onclick="eliminarUsuario()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
@@ -156,6 +159,62 @@ function listarClases() {
     document.getElementById('tablaClases').innerHTML = tabla;
 }
 
+function editarClase(id) {
+
+    event.preventDefault()
+
+    console.log(id)
+
+    let clases = JSON.parse(localStorage.getItem("clases"))
+
+    if (!clases) {
+        clases = []
+    }
+
+    let tabla = ""
+    let idClase = clases.findIndex(c => c.id == id)
+    let clase = clases[idClase];
+    tabla += `<tr><td ><input id="c${clase.id}" value="${clase.nombre}"> </td>`;
+    tabla += `
+        <td class="center btn-group footable-visible footable-last-column">
+                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
+                                <a href="" onclick="guardarClaseEditada('${clase.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i> guardar</a>
+                                <a onclick="eliminarUsuario()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                    data-placement="top" title="" data-original-title="Borrar"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td></tr>
+        `
+
+    document.getElementById("clase"+id).innerHTML = tabla
+
+
+}
+
+function guardarClaseEditada(id){
+
+    event.preventDefault()
+    let nombre = document.getElementById("c"+id).value
+    let clases = JSON.parse(localStorage.getItem('clases'));
+    let index = clases.findIndex(c => c.id == id);
+    
+    let indexClase = clases.find(c => c.nombre == nombre)
+    console.log(indexClase)
+    if (indexClase) {
+        alert("clase ya existe")
+        
+    }else{
+
+        clases[index].nombre = nombre;
+        
+        localStorage.setItem('clases', JSON.stringify(clases));
+        location.reload();
+    }
+    
+    
+
+}
 
 function agregarUsuario() {
     event.preventDefault();
