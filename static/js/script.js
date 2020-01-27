@@ -77,6 +77,15 @@ function logeo() {
 
 }
 
+function cerrarSesion(){
+    let sesiones = []
+    localStorage.setItem('sesiones', JSON.stringify(sesiones));
+
+    window.location.href = "index.html";
+
+    
+}
+
 function agregarUsuario() {
     event.preventDefault();
     let nombre = document.getElementById('agregarNombreUsuario');
