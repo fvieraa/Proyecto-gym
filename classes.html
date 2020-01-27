@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -10,81 +10,151 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
 
-    <title>Turnos Gym</title>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    <title>Usuarios</title>
 </head>
 
-<body>
+<body class="bg-light">
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="">
+            <div>
+                <h3></h3>
+            </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index-user">GYM</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index-user.html">Escritorio <span class="sr-only">(current)</span></a>
+            <h1> MENU</h1>
+
+            <ul class="list-unstyled ">
+                <li class="m-1">
+
+                    <a href="users.html" class=""><i class="fas fa-users"></i> Usuarios</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="users.html">Usuarios</a>
+                <li class="m-1">
+                    <a class="" href="#"><i class="fas fa-list-alt"></i> Clases</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="classes.html">Clases</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Horarios</a>
+
+                <li class="m-1">
+                    <a class="" href="#"><i class="fas fa-clock"></i> Horarios</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Busqueda" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Busqueda</button>
-            </form>
-        </div>
-    </nav>
+        </nav>
 
-    <div>
-        <div class="alert alert-secondary d-flex justify-content-center mt-3" role="alert">
-            Categorias de clases
-        </div>
-        <div>
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg" style="background-color: white;">
+                <div class="container-fluid">
 
-        </div>
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">Clases</th>
-                    <th >Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Crossfit</td>
-                    <td class="center btn-group footable-visible footable-last-column" >
-                        <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip" title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                        <a href="" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                        <a class="btn btn-danger delete" role="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Borrar"><i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
+                    <button type="button" id="sidebarCollapse" class="btn btn-success">
+                        <!-- <i class="fas fa-align-left"></i> -->
+                        <i class="fas fa-dumbbell"></i>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-user"></i>
+                    </button>
+
+                    <div class="logoNav">
+                        <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
+                            alt="">
+                    </div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="">Usuario</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div>
+                <div class="alert alert-secondary d-flex justify-content-between mt-3" role="alert">
+                    Listado de Clases
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAgregarClase"><i
+                            class="fas fa-plus-circle"></i> Agregar Clase</button>
+                </div>
+                <div>
+
+                </div>
+                <table class="table table-sm" ">
+                    <thead>
+                    <tr>
+                    <th scope=" col">Actividad</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tablaClases">
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Modal AGREGAR Clase-->
+            <div class="modal fade" id="modalAgregarClase" tabindex="-1" role="dialog"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content bg-secondary">
+                        <div class="container py-3 px-3">
+                            <form id="">
+                                <div class="form-group">
+                                    <label class="text-warning" for="exampleInputEmail1">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="agregarNombreClase">
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="agregarClase()">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                crossorigin="anonymous">
+                </script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous">
+                </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous">
+                </script>
+            <script src="static/js/script.js"></script>
+            <script type="text/javascript">
+
+
+                $(document).ready(function () {
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar').toggleClass('active');
+                    });
+                });
+
+                listarClases()
+
+            </script>
 </body>
 
 </html>

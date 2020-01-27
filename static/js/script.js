@@ -8,8 +8,14 @@ class Usuario {
         this.password = password;
     }
 }
+
+class Clase {
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+}
 class Sesion {
-    constructor(id,usuario, administrador) {
+    constructor(id, usuario, administrador) {
 
 
         this.id = id
@@ -23,7 +29,7 @@ function verSesiones() {
     let s = sesiones.findIndex(sesion => sesion.id == 0)
     let a = sesiones.find(adm => adm.id == s)
 
-    if(a.administrador){
+    if (a.administrador) {
         console.log("eres administrador")
     }
 
@@ -46,7 +52,7 @@ function logeo() {
 
             let sesiones = []
             let nuevaSesion = new Sesion(0,
-                "admin",true)
+                "admin", true)
             sesiones.push(nuevaSesion)
             localStorage.setItem('sesiones', JSON.stringify(sesiones));
 
@@ -77,14 +83,79 @@ function logeo() {
 
 }
 
-function cerrarSesion(){
+function cerrarSesion() {
     let sesiones = []
     localStorage.setItem('sesiones', JSON.stringify(sesiones));
 
     window.location.href = "index.html";
 
-    
+
 }
+
+function agregarClase() {
+    event.preventDefault();
+    let nombre = document.getElementById('agregarNombreClase');
+
+    if (nombre.value != "") {
+
+        let nuevaClase = new Clase(
+            nombre.value
+        );
+
+        let clases = JSON.parse(localStorage.getItem('clases'))
+        if (!clases) {
+            clases = []
+        };
+
+        let indexClase = clases.find(c => c.nombre == nombre.value)
+
+        if (!indexClase) {
+
+            clases.push(nuevaClase);
+            localStorage.setItem('clases', JSON.stringify(clases));
+            location.reload();
+
+        } else {
+            alert("clase ya existe")
+
+        }
+
+    } else {
+        alert("complete todos los campos")
+    }
+}
+
+function listarClases() {
+
+    let clases = JSON.parse(localStorage.getItem('clases'));
+    //Controlo si no tengo aún notas almacenadas
+    if (!clases) {
+        clases = [];
+    }
+
+    //Genero el contenido de la tabla
+    let tabla = "";
+    for (let index = 0; index < clases.length; index++) {
+        let clase = clases[index];
+        tabla += `<tr"><td>${clase.nombre}</td>`;
+        tabla += `
+        <td class="center btn-group footable-visible footable-last-column">
+                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
+                                <a href="" onclick="editarUsuario()" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
+                                <a onclick="eliminarUsuario()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                    data-placement="top" title="" data-original-title="Borrar"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td></tr>
+        `
+
+    }
+
+    //Muestro el contenido de la tabla
+    document.getElementById('tablaClases').innerHTML = tabla;
+}
+
 
 function agregarUsuario() {
     event.preventDefault();
