@@ -8,9 +8,32 @@ class Usuario {
         this.password = password;
     }
 }
+class Sesion {
+    constructor(id,usuario, administrador) {
+
+
+        this.id = id
+        this.usuario = usuario;
+        this.administrador = administrador
+    }
+}
+
+function verSesiones() {
+    let sesiones = JSON.parse(localStorage.getItem('sesiones'))
+    let s = sesiones.findIndex(sesion => sesion.id == 0)
+    let a = sesiones.find(adm => adm.id == s)
+
+    if(a.administrador){
+        console.log("eres administrador")
+    }
+
+
+
+
+}
+
 
 function logeo() {
-
     event.preventDefault()
 
     let usuario = document.getElementById("loginUsuario").value
@@ -21,9 +44,35 @@ function logeo() {
 
             window.location.href = "index-user.html";
 
+            let sesiones = []
+            let nuevaSesion = new Sesion(0,
+                "admin",true)
+            sesiones.push(nuevaSesion)
+            localStorage.setItem('sesiones', JSON.stringify(sesiones));
+
+
+
+
+
+        } else {
+
+            let usuarios = JSON.parse(localStorage.getItem('usuarios'))
+            if (!usuarios) {
+                usuarios = []
+            };
+            console.log(usuarios)
+            let indexUsuario = usuarios.find(u => u.usuario == usuario && u.password == password)
+            console.log(indexUsuario)
+
+            if (!indexUsuario) {
+
+                alert("usuario o contraseña invalidos")
+
+            }
+
         }
     } else {
-        console.log("complete todos los campos")
+        alert("complete todos los campos")
     }
 
 }
