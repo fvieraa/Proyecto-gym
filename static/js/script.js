@@ -100,7 +100,7 @@ function agregarUsuario() {
                 if (!usuarios) {
                     usuarios = []
                 };
-                console.log(usuarios)
+
                 let indexUsuario = usuarios.find(u => u.usuario == usuario.value)
                 let indexDni = usuarios.find(u => u.dni == dni.value)
 
@@ -144,14 +144,14 @@ function listarUsuarios() {
     let tabla = "";
     for (let index = 0; index < usuarios.length; index++) {
         let usuario = usuarios[index];
-        tabla += '<tr><td>' + usuario.nombre + '</td><td>' + usuario.usuario + '</td><td>' + usuario.dni + '</td>';
+        tabla += `<tr id="${usuario.dni}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
         tabla += `
         <td class="center btn-group footable-visible footable-last-column">
                                 <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                <a href="" onclick="editarUsuario(${usuario.dni})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a onclick="eliminarUsuario(${usuario.dni})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
                                         class="fa fa-trash-o"></i></a>
                             </td></tr>
@@ -164,3 +164,40 @@ function listarUsuarios() {
 }
 
 
+function editarUsuario(dni) {
+
+    event.preventDefault()
+
+    let usuarios = JSON.parse(localStorage.getItem("usuarios"))
+
+    if (!usuarios) {
+        usuarios = []
+    }
+
+    let tabla = ""
+    let idUsuarios = usuarios.findIndex(u => u.dni == dni)
+    console.log(idUsuarios)
+    let usuario = usuarios[idUsuarios];
+    console.log(usuarios[idUsuarios].dni)
+    tabla += `<tr id="${usuario.dni}"><td><input value="${usuario.nombre}"></td><td><input value="${usuario.usuario}"></td><td><input value="${usuario.dni}"></td>`;
+    tabla += `
+        <td class="center btn-group footable-visible footable-last-column">
+                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
+                                <a href="" onclick="editarUsuario(${usuario.dni})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
+                                <a onclick="eliminarUsuario(${usuario.dni})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                    data-placement="top" title="" data-original-title="Borrar"><i
+                                        class="fa fa-trash-o"></i></a>
+                            </td></tr>
+        `
+
+    document.getElementById(dni).innerHTML = tabla
+
+
+}
+
+function eliminarUsuario() {
+
+    console.log("funciona")
+}
