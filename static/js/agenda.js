@@ -195,12 +195,6 @@ function cargar() {
     }
     localStorage.setItem('agenda', JSON.stringify(agenda));
   }
-
-
-
-
-
-
 }
 
 function agregarClase() {
@@ -235,4 +229,39 @@ function agregarClase() {
   } else {
     alert("complete todos los campos")
   }
+}
+
+function listarEntradas() {
+
+  let agenda = JSON.parse(localStorage.getItem('agenda'));
+  //Controlo si no tengo aún notas almacenadas
+  if (!agenda) {
+      agenda = [];
+  }
+
+  //Genero el contenido de la tabla
+  let tabla = "";
+  for (let index = 0; index < agenda.length; index++) {
+      let agen = agenda[index];
+      if(agenda[index].fecha.split(" ")[0] == "Mon"){
+        agen.fecha = "Lunes"
+      }
+      if(agenda[index].fecha.split(" ")[0] == "Tue"){
+        agen.fecha = "Martes"
+      }
+      if(agenda[index].fecha.split(" ")[0] == "Wed"){
+        agen.fecha = "Miercoles"
+      }
+      if(agenda[index].fecha.split(" ")[0] == "Thu"){
+        agen.fecha = "Jueves"
+      }
+      if(agenda[index].fecha.split(" ")[0] == "Fri"){
+        agen.fecha = "Viernes"
+      }
+
+      tabla += `<tr><td>${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
+  }
+
+  //Muestro el contenido de la tabla
+  document.getElementById('tablaAgenda').innerHTML = tabla;
 }
