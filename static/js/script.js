@@ -32,7 +32,7 @@ function verSesiones() {
     let a = sesiones.find(adm => adm.id == s)
 
     if (a.administrador) {
-        console.log("eres administrador")
+        // console.log("eres administrador")
     }
 
 
@@ -140,9 +140,9 @@ function listarClases() {
     let tabla = "";
     for (let index = 0; index < clases.length; index++) {
         let clase = clases[index];
-        tabla += `<tr"><td id="clase${clase.id}">${clase.nombre}</td>`;
+        tabla += `<tr><td id="clase${clase.id}">${clase.nombre}</td>`;
         tabla += `
-        <td class="center btn-group footable-visible footable-last-column">
+        <td id="botonesClases${clase.id}" class="center btn-group footable-visible footable-last-column">
                                 <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
                                 <a href="" onclick="editarClase(${clase.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
@@ -150,7 +150,7 @@ function listarClases() {
                                 <a onclick="eliminarUsuario()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
                                         class="fa fa-trash-o"></i></a>
-                            </td></tr>
+                            </td>
         `
 
     }
@@ -162,8 +162,8 @@ function listarClases() {
 function editarClase(id) {
 
     event.preventDefault()
-
-    console.log(id)
+    listarClases()
+    document.getElementById("botonesClases"+id).innerHTML = ""
 
     let clases = JSON.parse(localStorage.getItem("clases"))
 
@@ -181,11 +181,12 @@ function editarClase(id) {
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
                                 <a href="" onclick="guardarClaseEditada('${clase.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i> guardar</a>
-                                <a onclick="eliminarUsuario()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a onclick="listarClases()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o"></i></a>
+                                        class="fa fa-trash-o"></i>Cancelar</a>
                             </td></tr>
         `
+    
 
     document.getElementById("clase"+id).innerHTML = tabla
 
@@ -200,20 +201,14 @@ function guardarClaseEditada(id){
     let index = clases.findIndex(c => c.id == id);
     
     let indexClase = clases.find(c => c.nombre == nombre)
-    console.log(indexClase)
     if (indexClase) {
-        alert("clase ya existe")
-        
+        alert("clase ya existe")        
     }else{
-
         clases[index].nombre = nombre;
         
         localStorage.setItem('clases', JSON.stringify(clases));
         location.reload();
     }
-    
-    
-
 }
 
 function agregarUsuario() {
