@@ -1,8 +1,6 @@
 class Agenda {
 
   constructor(fecha, turno, clase, cupo) {
-
-
     this.fecha = fecha;
     this.turno = turno;
     this.clase = clase;
@@ -10,18 +8,6 @@ class Agenda {
   }
 }
 
-function fechaHoy() {
-  // var hoy = new Date(new Date().getTime() + 144 * 60 * 60 * 1000)
-  var hoy = new Date()
-  var fecha = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
-  var hora = hoy.getHours() + 'hs-' + hoy.getMinutes() + 'min';
-  var fechaHora = fecha + ' ' + hora;
-
-  // console.log(hoy.toString().split(' ')[0])
-  // console.log(hoy.toString().split(' '))
-
-  // return fechaHora;
-}
 
 function llenarModal() {
 
@@ -44,162 +30,170 @@ function cargar() {
   event.preventDefault();
 
   let agenda = JSON.parse(localStorage.getItem('agenda'))
-  console.log(agenda)
-  for (let index = 0; index < agenda.length; index++) {
-    const element = agenda[index];
-    console.log(element.fecha.split(" ")[0], element.turno)
-    
-  }
   if (!agenda) {
     agenda = []
   };
-
+  console.log(agenda)
   let lunes = document.getElementById('lunes').checked;
   let martes = document.getElementById('martes').checked;
   let miercoles = document.getElementById('miercoles').checked;
+  console.log(lunes)
   let jueves = document.getElementById('jueves').checked;
   let viernes = document.getElementById('viernes').checked;
   let dia = 24
-  let semana = []
+  let mes = []
   for (let index = 0; index < 30; index++) {
-
-
     let fechaHoy = new Date(new Date().getTime() + dia * 60 * 60 * 1000)
-    let nameDay = fechaHoy.toString().split(" ")[0]
     dia = dia + 24
-    semana.push(fechaHoy.toString())
-
+    mes.push(fechaHoy.toString())
   }
   if (lunes) {
 
-    for (let index = 0; index < semana.length; index++) {
-      const element = semana[index].split(" ")[0];
+    let turno = document.getElementById('optionTurno').value;
+    let clase = document.getElementById('optionClases').value;
+    let cupo = 10;
+    let cont = 0
+    let nuevaEntrada
+    for (let index = 0; index < mes.length; index++) {
+      const element = mes[index].split(" ")[0];
       if (element == "Mon") {
-
-        let fecha = semana[index];
-        let turno = document.getElementById('optionTurno').value;
-        let clase = document.getElementById('optionClases').value;
-        let cupo = 10;
-
-
-
-        let nuevaEntrada = new Agenda(
-          fecha,
-          turno,
-          clase,
-          cupo
-        )
+        let fecha = mes[index];
+        nuevaEntrada = new Agenda(
+          fecha, turno, clase, cupo)
+        agenda.forEach(element => {
+          if ((element.fecha.split(" ")[0] == "Mon") && (element.turno == turno)) {
+            cont++
+          }
+        })
+      }
+    }
+    if (cont > 3) {
+      console.log("ya hay algo en esa fecha y horario")
+    } else {
+      for (let index = 0; index < 4; index++) {
 
         agenda.push(nuevaEntrada);
-        localStorage.setItem('agenda', JSON.stringify(agenda));
       }
-
     }
+    localStorage.setItem('agenda', JSON.stringify(agenda));
   }
+
 
   if (martes) {
-
-    for (let index = 0; index < semana.length; index++) {
-      const element = semana[index].split(" ")[0];
+    let turno = document.getElementById('optionTurno').value;
+    let clase = document.getElementById('optionClases').value;
+    let cupo = 10;
+    let cont = 0
+    let nuevaEntrada
+    for (let index = 0; index < mes.length; index++) {
+      const element = mes[index].split(" ")[0];
       if (element == "Tue") {
-
-        let fecha = semana[index];
-        let turno = document.getElementById('optionTurno').value;
-        let clase = document.getElementById('optionClases').value;
-        let cupo = 10;
-
-
-
-        let nuevaEntrada = new Agenda(
-          fecha,
-          turno,
-          clase,
-          cupo
-        )
+        let fecha = mes[index];
+        nuevaEntrada = new Agenda(
+          fecha, turno, clase, cupo)
+        agenda.forEach(element => {
+          if ((element.fecha.split(" ")[0] == "Tue") && (element.turno == turno)) {
+            cont++
+          }
+        })
+      }
+    }
+    if (cont > 3) {
+      console.log("ya hay algo en esa fecha y horario")
+    } else {
+      for (let index = 0; index < 4; index++) {
 
         agenda.push(nuevaEntrada);
-        localStorage.setItem('agenda', JSON.stringify(agenda));
       }
-
     }
+    localStorage.setItem('agenda', JSON.stringify(agenda));
   }
   if (miercoles) {
-
-    for (let index = 0; index < semana.length; index++) {
-      const element = semana[index].split(" ")[0];
+    let turno = document.getElementById('optionTurno').value;
+    let clase = document.getElementById('optionClases').value;
+    let cupo = 10;
+    let cont = 0
+    let nuevaEntrada
+    for (let index = 0; index < mes.length; index++) {
+      const element = mes[index].split(" ")[0];
       if (element == "Wed") {
-
-        let fecha = semana[index];
-        let turno = document.getElementById('optionTurno').value;
-        let clase = document.getElementById('optionClases').value;
-        let cupo = 10;
-
-
-
-        let nuevaEntrada = new Agenda(
-          fecha,
-          turno,
-          clase,
-          cupo
-        )
+        let fecha = mes[index];
+        nuevaEntrada = new Agenda(
+          fecha, turno, clase, cupo)
+        agenda.forEach(element => {
+          if ((element.fecha.split(" ")[0] == "Wed") && (element.turno == turno)) {
+            cont++
+          }
+        })
+      }
+    }
+    if (cont > 3) {
+      console.log("ya hay algo en esa fecha y horario")
+    } else {
+      for (let index = 0; index < 4; index++) {
 
         agenda.push(nuevaEntrada);
-        localStorage.setItem('agenda', JSON.stringify(agenda));
       }
-
     }
+    localStorage.setItem('agenda', JSON.stringify(agenda));
   }
   if (jueves) {
-
-    for (let index = 0; index < semana.length; index++) {
-      const element = semana[index].split(" ")[0];
+    let turno = document.getElementById('optionTurno').value;
+    let clase = document.getElementById('optionClases').value;
+    let cupo = 10;
+    let cont = 0
+    let nuevaEntrada
+    for (let index = 0; index < mes.length; index++) {
+      const element = mes[index].split(" ")[0];
       if (element == "Thu") {
-
-        let fecha = semana[index];
-        let turno = document.getElementById('optionTurno').value;
-        let clase = document.getElementById('optionClases').value;
-        let cupo = 10;
-
-
-
-        let nuevaEntrada = new Agenda(
-          fecha,
-          turno,
-          clase,
-          cupo
-        )
+        let fecha = mes[index];
+        nuevaEntrada = new Agenda(
+          fecha, turno, clase, cupo)
+        agenda.forEach(element => {
+          if ((element.fecha.split(" ")[0] == "Thu") && (element.turno == turno)) {
+            cont++
+          }
+        })
+      }
+    }
+    if (cont > 3) {
+      console.log("ya hay algo en esa fecha y horario")
+    } else {
+      for (let index = 0; index < 4; index++) {
 
         agenda.push(nuevaEntrada);
-        localStorage.setItem('agenda', JSON.stringify(agenda));
       }
-
     }
+    localStorage.setItem('agenda', JSON.stringify(agenda));
   }
   if (viernes) {
-
-    for (let index = 0; index < semana.length; index++) {
-      const element = semana[index].split(" ")[0];
+    let turno = document.getElementById('optionTurno').value;
+    let clase = document.getElementById('optionClases').value;
+    let cupo = 10;
+    let cont = 0
+    let nuevaEntrada
+    for (let index = 0; index < mes.length; index++) {
+      const element = mes[index].split(" ")[0];
       if (element == "Fri") {
-
-        let fecha = semana[index];
-        let turno = document.getElementById('optionTurno').value;
-        let clase = document.getElementById('optionClases').value;
-        let cupo = 10;
-
-
-
-        let nuevaEntrada = new Agenda(
-          fecha,
-          turno,
-          clase,
-          cupo
-        )
+        let fecha = mes[index];
+        nuevaEntrada = new Agenda(
+          fecha, turno, clase, cupo)
+        agenda.forEach(element => {
+          if ((element.fecha.split(" ")[0] == "Fri") && (element.turno == turno)) {
+            cont++
+          }
+        })
+      }
+    }
+    if (cont > 3) {
+      console.log("ya hay algo en esa fecha y horario")
+    } else {
+      for (let index = 0; index < 4; index++) {
 
         agenda.push(nuevaEntrada);
-        localStorage.setItem('agenda', JSON.stringify(agenda));
       }
-
     }
+    localStorage.setItem('agenda', JSON.stringify(agenda));
   }
 
 
