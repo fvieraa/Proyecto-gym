@@ -1,8 +1,8 @@
 class Usuario {
 
-    constructor(nombre, dni, usuario, password) {
+    constructor(id, nombre, dni, usuario, password) {
 
-
+        this.id = id
         this.nombre = nombre;
         this.dni = dni;
         this.usuario = usuario;
@@ -147,7 +147,7 @@ function listarClases() {
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
                                 <a href="" onclick="editarClase(${clase.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a onclick="eliminarUsuario()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
                                         class="fa fa-trash-o"></i></a>
                             </td>
@@ -163,7 +163,7 @@ function editarClase(id) {
 
     event.preventDefault()
     listarClases()
-    document.getElementById("botonesClases"+id).innerHTML = ""
+    document.getElementById("botonesClases" + id).innerHTML = ""
 
     let clases = JSON.parse(localStorage.getItem("clases"))
 
@@ -186,26 +186,26 @@ function editarClase(id) {
                                         class="fa fa-trash-o"></i>Cancelar</a>
                             </td></tr>
         `
-    
 
-    document.getElementById("clase"+id).innerHTML = tabla
+
+    document.getElementById("clase" + id).innerHTML = tabla
 
 
 }
 
-function guardarClaseEditada(id){
+function guardarClaseEditada(id) {
 
     event.preventDefault()
-    let nombre = document.getElementById("c"+id).value
+    let nombre = document.getElementById("c" + id).value
     let clases = JSON.parse(localStorage.getItem('clases'));
     let index = clases.findIndex(c => c.id == id);
-    
+
     let indexClase = clases.find(c => c.nombre == nombre)
     if (indexClase) {
-        alert("clase ya existe")        
-    }else{
+        alert("clase ya existe")
+    } else {
         clases[index].nombre = nombre;
-        
+
         localStorage.setItem('clases', JSON.stringify(clases));
         location.reload();
     }
@@ -223,17 +223,18 @@ function agregarUsuario() {
         if (nombre.value.length < 60) {
             if (usuario.value.length < 30) {
 
+                let usuarios = JSON.parse(localStorage.getItem('usuarios'))
+                if (!usuarios) {
+                    usuarios = []
+                };
                 let nuevoUsuario = new Usuario(
+                    id = usuarios.length + 1,
                     nombre.value,
                     dni.value,
                     usuario.value,
                     password.value
                 );
 
-                let usuarios = JSON.parse(localStorage.getItem('usuarios'))
-                if (!usuarios) {
-                    usuarios = []
-                };
 
                 let indexUsuario = usuarios.find(u => u.usuario == usuario.value)
                 let indexDni = usuarios.find(u => u.dni == dni.value)
@@ -278,14 +279,14 @@ function listarUsuarios() {
     let tabla = "";
     for (let index = 0; index < usuarios.length; index++) {
         let usuario = usuarios[index];
-        tabla += `<tr id="${usuario.dni}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
+        tabla += `<tr id="fila${usuario.id}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
         tabla += `
         <td class="center btn-group footable-visible footable-last-column">
                                 <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="editarUsuario(${usuario.dni})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a onclick="eliminarUsuario(${usuario.dni})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a onclick="" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
                                         class="fa fa-trash-o"></i></a>
                             </td></tr>
@@ -298,9 +299,10 @@ function listarUsuarios() {
 }
 
 
-function editarUsuario(dni) {
+function editarUsuario(id) {
 
     event.preventDefault()
+    listarUsuarios()
 
     let usuarios = JSON.parse(localStorage.getItem("usuarios"))
 
@@ -309,26 +311,51 @@ function editarUsuario(dni) {
     }
 
     let tabla = ""
-    let idUsuarios = usuarios.findIndex(u => u.dni == dni)
-    console.log(idUsuarios)
+    let idUsuarios = usuarios.findIndex(u => u.id == id)
     let usuario = usuarios[idUsuarios];
-    console.log(usuarios[idUsuarios].dni)
-    tabla += `<tr id="${usuario.dni}"><td><input value="${usuario.nombre}"></td><td><input value="${usuario.usuario}"></td><td><input value="${usuario.dni}"></td>`;
+    tabla += `<tr id="f${usuario.id}"><td><input id="n${usuario.id}" value="${usuario.nombre}"></td><td><input id="u${usuario.id}" value="${usuario.usuario}"></td><td><input value="${usuario.dni}"></td>`;
     tabla += `
         <td class="center btn-group footable-visible footable-last-column">
                                 <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="editarUsuario(${usuario.dni})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
-                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a onclick="eliminarUsuario(${usuario.dni})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a href="" onclick="guardarUsuarioEditado(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i>Aceptar</a>
+                                <a onClick="listarUsuarios()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o"></i></a>
+                                        class="fa fa-trash-o" ></i>Cancelar</a>
                             </td></tr>
         `
 
-    document.getElementById(dni).innerHTML = tabla
+    document.getElementById("fila" + id).innerHTML = tabla
 
 
+}
+function guardarUsuarioEditado(id) {
+
+    event.preventDefault()
+    let nombre = document.getElementById("n" + id).value;
+    let usuario = document.getElementById("u" + id).value;
+
+    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+
+
+    let index = usuarios.findIndex(c => c.id == id);
+    console.log(index)
+    //EXCLUIR EL ID
+    
+    usuarios[index].nombre = nombre;
+    
+    let indexUsuario = usuarios.filter(u => u.usuario == usuario)
+    console.log(indexUsuario.length)
+    if (indexUsuario.length >       1 ) {
+        console.log("usuario ya existe")
+    } else {
+        usuarios[index].usuario = usuario;
+
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        location.reload();
+
+    }
 }
 
 function eliminarUsuario() {
