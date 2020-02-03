@@ -59,9 +59,6 @@ function logeo() {
             localStorage.setItem('sesiones', JSON.stringify(sesiones));
 
 
-
-
-
         } else {
 
             let usuarios = JSON.parse(localStorage.getItem('usuarios'))
@@ -286,7 +283,7 @@ function listarUsuarios() {
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
                                 <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a onclick="" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
                                         class="fa fa-trash-o"></i></a>
                             </td></tr>
@@ -299,21 +296,19 @@ function listarUsuarios() {
 }
 
 
-function editarUsuario(id) {
+function editarUsuario(codigo) {
 
     event.preventDefault()
-    listarUsuarios()
 
     let usuarios = JSON.parse(localStorage.getItem("usuarios"))
 
-    if (!usuarios) {
-        usuarios = []
-    }
+    let index = usuarios.findIndex(c => c.id == codigo);
+    console.log(index)
 
     let tabla = ""
-    let idUsuarios = usuarios.findIndex(u => u.id == id)
+    let idUsuarios = usuarios.findIndex(u => u.id == codigo)
     let usuario = usuarios[idUsuarios];
-    tabla += `<tr id="f${usuario.id}"><td><input id="n${usuario.id}" value="${usuario.nombre}"></td><td><input id="u${usuario.id}" value="${usuario.usuario}"></td><td><input value="${usuario.dni}"></td>`;
+    tabla += `<tr id="f${usuario.id}"><td><input id="${usuario.id}" value="${usuario.nombre}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
     tabla += `
         <td class="center btn-group footable-visible footable-last-column">
                                 <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
@@ -326,39 +321,32 @@ function editarUsuario(id) {
                             </td></tr>
         `
 
-    document.getElementById("fila" + id).innerHTML = tabla
+    document.getElementById("fila" + codigo).innerHTML = tabla
 
 
 }
-function guardarUsuarioEditado(id) {
+function guardarUsuarioEditado(codigo) {
 
     event.preventDefault()
-    let nombre = document.getElementById("n" + id).value;
-    let usuario = document.getElementById("u" + id).value;
-
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
-
-
-    let index = usuarios.findIndex(c => c.id == id);
+    let nombre = document.getElementById(codigo).value;
+    let index = usuarios.findIndex(c => c.id == codigo);
     console.log(index)
-    //EXCLUIR EL ID
-    
     usuarios[index].nombre = nombre;
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    listarUsuarios()
     
-    let indexUsuario = usuarios.filter(u => u.usuario == usuario)
-    console.log(indexUsuario.length)
-    if (indexUsuario.length >       1 ) {
-        console.log("usuario ya existe")
-    } else {
-        usuarios[index].usuario = usuario;
-
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        location.reload();
-
-    }
 }
 
-function eliminarUsuario() {
+function eliminarUsuario(codigo) {
 
-    console.log("funciona")
+    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+    let index = usuarios.findIndex(c => c.id == codigo);
+    console.log(index);
+    console.log(usuarios)
+    usuarios.splice(index, 1)
+    console.log(usuarios)
+    localStorage.setItem('usuarios',JSON.stringify(usuarios))
+    listarUsuarios();
+    
 }
