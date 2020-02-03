@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.css"
+        integrity="sha256-x0YxbDRtAIaUla1aUzriI3mpIDGtu8IhYeY3QV+BkNU=" crossorigin="anonymous" />
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+
+    <title>Turnos Gym</title>
+</head>
+
+<body class="bg-light">
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="">
+            <div>
+                <h3></h3>
+            </div>
+
+            <h1> MENU</h1>
+
+            <ul class="list-unstyled ">
+                <li class="m-1">
+
+                    <a href="users.html" class=""><i class="fas fa-users"></i> Usuarios</a>
+                </li>
+                <li class="m-1">
+                    <a class="" href="classes.html"><i class="fas fa-list-alt"></i> Clases</a>
+                </li>
+
+                <li class="m-1">
+                    <a class="" href="#"><i class="fas fa-clock"></i> Agenda</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg justify-content-between " style="background-color: white;">
+                <button type="button" id="sidebarCollapse" class="btn btn-success">
+                    <!-- <i class="fas fa-align-left"></i> -->
+                    <i class="fas fa-dumbbell"></i>
+                    <span></span>
+                </button>
+                <div class="">
+                    <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
+                        alt="">
+                </div>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Administrador
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="alert alert-secondary d-flex justify-content-between mt-3" role="alert">
+                Agenda
+                <button class="btn btn-success" data-toggle="modal" data-target="#modalAgenda"
+                    onclick="llenarModal()"><i class="fas fa-plus-circle"></i> Gestionar</button>
+            </div>
+            <table class="table table-sm" ">
+                <thead>
+                    <tr>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Clase</th>
+                        <th scope="col">Turno</th>
+                        <th scope="col">Cupo</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAgenda">
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Agenda-->
+    <div class="modal fade" id="modalAgenda" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-secondary">
+                <div class="container py-3 px-3">
+                    <form id="">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1" class="text-warning">Clase</label>
+                            <select class="form-control" id="optionClases">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-warning" for="exampleInputEmail1">Turno</label>
+                            <select class="form-control" id="optionTurno">
+
+                                <option>1- 14:00</option>
+                                <option>2- 16:00</option>
+                                <option>3- 18:00</option>
+                                <option>4- 20:00</option>
+                                <option>5- 22:00</option>
+                            </select>
+                        </div>
+                        <div class="for-group d-flex justify-content-between">                            
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="lunes">
+                                <label class="form-check-label text-warning" for="exampleCheck1">Lunes</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="martes">
+                                <label class="form-check-label text-warning" for="exampleCheck1">Martes</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="miercoles">
+                                <label class="form-check-label text-warning" for="exampleCheck1">Miercoles</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="jueves">
+                                <label class="form-check-label text-warning" for="exampleCheck1">Jueves</label>
+                            </div>                            
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="viernes">
+                                <label class="form-check-label text-warning" for="exampleCheck1">Viernes</label>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="cargar()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+    <script src="static/js/agenda.js"></script>
+    <script src="static/js/script.js    "></script>
+    <script type="text/javascript">
+        verSesiones()
+        listarEntradas()
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+    </script>
+</body>
+
+</html>
