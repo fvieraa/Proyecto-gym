@@ -7,6 +7,7 @@ class Usuario {
         this.dni = dni;
         this.usuario = usuario;
         this.password = password;
+        this.estado = true;
     }
 }
 
@@ -276,18 +277,34 @@ function listarUsuarios() {
     let tabla = "";
     for (let index = 0; index < usuarios.length; index++) {
         let usuario = usuarios[index];
-        tabla += `<tr id="fila${usuario.id}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
-        tabla += `
-        <td class="center btn-group footable-visible footable-last-column">
-                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
-                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
-                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
-                                    data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o"></i></a>
-                            </td></tr>
-        `
+
+        if (usuario.estado) {
+            tabla += `<tr id="fila${usuario.id}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
+            tabla += `
+            <td class="center btn-group footable-visible footable-last-column">
+                                    <a data-status="1" onclick="suspensionUsuario(${usuario.id})" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                        title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
+                                    <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                        title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
+                                    <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                        data-placement="top" title="" data-original-title="Borrar"><i
+                                            class="fa fa-trash-o"></i></a>
+                                </td></tr>
+            `
+        } else {
+            tabla += `<tr id="fila${usuario.id}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
+            tabla += `
+            <td class="center btn-group footable-visible footable-last-column">
+                                    <a data-status="1" onclick="suspensionUsuario(${usuario.id})" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                        title="" data-original-title="Acceso"><i class="fa fa-circle text-danger"></i></a>
+                                    <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                        title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
+                                    <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                        data-placement="top" title="" data-original-title="Borrar"><i
+                                            class="fa fa-trash-o"></i></a>
+                                </td></tr>
+            `
+        }
 
     }
 
@@ -298,33 +315,31 @@ function listarUsuarios() {
 
 function editarUsuario(codigo) {
 
+    listarUsuarios()
     event.preventDefault()
-
     let usuarios = JSON.parse(localStorage.getItem("usuarios"))
-
     let index = usuarios.findIndex(c => c.id == codigo);
     console.log(index)
 
     let tabla = ""
     let idUsuarios = usuarios.findIndex(u => u.id == codigo)
     let usuario = usuarios[idUsuarios];
-    tabla += `<tr id="f${usuario.id}"><td><input id="${usuario.id}" value="${usuario.nombre}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
+    tabla += `<tr id="f${usuario.id}"><td><input id="${usuario.id}" value="${usuario.nombre}"><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
     tabla += `
         <td class="center btn-group footable-visible footable-last-column">
-                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                <a data-status="1" onclick="suspensionUsuario(${usuario.id})" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
                                 <a href="" onclick="guardarUsuarioEditado(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i>Aceptar</a>
-                                <a onClick="listarUsuarios()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a onclick="listarUsuarios()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o" ></i>Cancelar</a>
+                                        class="fa fa-trash-o"></i>Cancelar</a>
                             </td></tr>
         `
 
     document.getElementById("fila" + codigo).innerHTML = tabla
-
-
 }
+
 function guardarUsuarioEditado(codigo) {
 
     event.preventDefault()
@@ -332,9 +347,14 @@ function guardarUsuarioEditado(codigo) {
     let nombre = document.getElementById(codigo).value;
     let index = usuarios.findIndex(c => c.id == codigo);
     console.log(index)
-    usuarios[index].nombre = nombre;
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    listarUsuarios()
+    if (confirm("Desea modificar el nombre del usuario?")) {
+        usuarios[index].nombre = nombre;
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        listarUsuarios()
+    } else {
+        listarUsuarios()
+    }
+        
     
 }
 
@@ -344,9 +364,40 @@ function eliminarUsuario(codigo) {
     let index = usuarios.findIndex(c => c.id == codigo);
     console.log(index);
     console.log(usuarios)
-    usuarios.splice(index, 1)
-    console.log(usuarios)
-    localStorage.setItem('usuarios',JSON.stringify(usuarios))
-    listarUsuarios();
+
+    if (confirm("¿Desea eliminar Usuario?")) {
+
+        usuarios.splice(index, 1)
+        console.log(usuarios)
+        localStorage.setItem('usuarios',JSON.stringify(usuarios))
+        listarUsuarios();
+        
+    }
+}
+
+function suspensionUsuario(codigo) {
     
+    event.preventDefault()
+
+    let usuarios = JSON.parse(localStorage.getItem("usuarios"))
+    let tabla = "";
+    let idUsuarios = usuarios.findIndex(u => u.id == codigo);
+    let usuario = usuarios[idUsuarios];
+    
+    if (usuario.estado) {
+        
+        confirm("¿Desea suspender el usuario?")
+        usuario.estado = false;
+        localStorage.setItem('usuarios',JSON.stringify(usuarios))
+        listarUsuarios()
+
+    } else {
+        confirm("¿Desea habilitar el usuario?")
+        usuario.estado = true;
+        localStorage.setItem('usuarios',JSON.stringify(usuarios))
+        listarUsuarios()
+    }
+
+
+
 }
