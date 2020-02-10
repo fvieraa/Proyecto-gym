@@ -8,7 +8,7 @@ class Agenda {
   }
 }
 
-
+/* Esta funcion se encarga de colocar las clases que se cargaron, en el modal del alta de horarios */
 function llenarModal() {
 
   let clases = JSON.parse(localStorage.getItem('clases'));
@@ -28,22 +28,26 @@ function cargar() {
 
 
   event.preventDefault();
-
+/* Buscar/Crear la agenda en el LocalStorage */
   let agenda = JSON.parse(localStorage.getItem('agenda'))
   if (!agenda) {
     agenda = []
   };
   console.log(agenda)
+  
+  /* Definir las variables true para cada dia */
   let lunes = document.getElementById('lunes').checked;
   let martes = document.getElementById('martes').checked;
   let miercoles = document.getElementById('miercoles').checked;
   console.log(lunes)
   let jueves = document.getElementById('jueves').checked;
   let viernes = document.getElementById('viernes').checked;
-  let dia = 24
+  
+  /*  */
+  let dia = 24 /* 24 horas del dia */
   let mes = []
   for (let index = 0; index < 30; index++) {
-    let fechaHoy = new Date(new Date().getTime() + dia * 60 * 60 * 1000)
+    let fechaHoy = new Date(new Date().getTime() + dia * 60 * 60 * 1000 /* Pasa las horas del dia a milisegundos */)
     dia = dia + 24
     mes.push(fechaHoy.toString())
   }
