@@ -358,3 +358,37 @@ function eliminarUsuario(codigo) {
     listarUsuarios();
     
 }
+
+function cambiarPassword(){
+    let sesiones = JSON.parse(localStorage.getItem('sesiones'))
+    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+    if(!usuarios){
+        usuarios = [];
+    }
+    let usuarioActivo = usuarios.find(u => (u.id == sesiones[0].id))
+    console.log(usuarioActivo);    
+    if(usuarioActivo.password == usuarioActivo.usuario){
+        $('#modalCambiarPassword').modal('show');
+    }
+}
+
+function guardarNuevoPassword(){
+    let nuevoPassword = document.getElementById('nuevaClave').value;
+    
+    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+    let sesiones = JSON.parse(localStorage.getItem('sesiones'));
+    for (let index = 0; index < usuarios.length; index++) {
+        if(sesiones[0].id == usuarios[index].id){
+            if(usuarios[index].usuario == nuevoPassword){
+                alert('La clave no puede ser igual al nombre de usuario');
+            }else if(nuevoPassword == ''){
+                alert('Debe ingresar una clave');
+            }else {
+            usuarios[index].password = nuevoPassword;
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            document.getElementById('nuevaClave').value = '';
+            $('#modalCambiarPassword').modal('hide');
+            }
+        }   
+    }
+}
