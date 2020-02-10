@@ -36,9 +36,6 @@ function verSesiones() {
         // console.log("eres administrador")
     }
 
-
-
-
 }
 
 
@@ -51,7 +48,7 @@ function logeo() {
 
         if (usuario == "admin" && password == "admin") {
 
-            window.location.href = "index-user.html";
+            window.location.href = "index-admin.html";
 
             let sesiones = []
             let nuevaSesion = new Sesion(0,

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+
+    <title>Turnos Gym</title>
+</head>
+
+<body class="bg-light">
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="">
+            <div>
+                <h3></h3>
+            </div>
+
+            <h1> MENU</h1>
+
+            <ul class="list-unstyled ">
+                <li class="m-1">
+
+                    <a href="users.html" class=""><i class="fas fa-users"></i> Usuarios</a>
+                </li>
+                <li class="m-1">
+                    <a class="" href="classes.html"><i class="fas fa-list-alt"></i> Clases</a>
+                </li>
+
+                <li class="m-1">
+                    <a class="" href="agenda.html"><i class="fas fa-clock"></i> Agenda</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg justify-content-between " style="background-color: white;">
+                <button type="button" id="sidebarCollapse" class="btn btn-success">
+                    <!-- <i class="fas fa-align-left"></i> -->
+                    <i class="fas fa-dumbbell"></i>
+                    <span></span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="">
+                    <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
+                        alt="">
+                </div>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Administrador
+                    </a>
+                  
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a>
+                    </div>
+                  </div>
+            </nav>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-sm">
+                        <button><a href="users.html">Usuarios</a> </button>
+                    </div>
+                    <div class="col-sm">
+                        <button><a href="classes.html">Clases</a> </button>
+                    </div>
+                    <div class="col-sm">
+                        <button><a href="#">Horarios</a> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+    <script src="static/js/script.js"></script>
+    <script type="text/javascript">
+        verSesiones()
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+    </script>
+</body>
+
+</html>
