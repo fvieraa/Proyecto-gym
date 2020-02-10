@@ -66,13 +66,21 @@ function logeo() {
                 usuarios = []
             };
             console.log(usuarios)
-            let indexUsuario = usuarios.find(u => u.usuario == usuario && u.password == password)
+            let indexUsuario = usuarios.find(u => (u.usuario == usuario && u.password == password))
             console.log(indexUsuario)
 
             if (!indexUsuario) {
 
                 alert("usuario o contraseña invalidos")
 
+            } else {
+                window.location.href = "index-noAdmin.html";
+            let usuarioSesionAbierta = usuarios.find(u => (u.usuario == usuario))
+            let sesiones = []
+            let nuevaSesion = new Sesion(usuarioSesionAbierta.id,
+                usuarioSesionAbierta.usuario, false)
+            sesiones.push(nuevaSesion)
+            localStorage.setItem('sesiones', JSON.stringify(sesiones));
             }
 
         }
