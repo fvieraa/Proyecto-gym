@@ -33,14 +33,9 @@ function cargar() {
   if (!agenda) {
     agenda = []
   };
-<<<<<<< HEAD
   console.log(agenda)
   
   /* Definir las variables true para cada dia */
-=======
-
-  //SELECCIN DE DIAS
->>>>>>> 14148c7fb60161a7ecda46c67e7e786860c6b350
   let lunes = document.getElementById('lunes').checked;
   let martes = document.getElementById('martes').checked;
   let miercoles = document.getElementById('miercoles').checked;
