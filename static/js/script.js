@@ -422,21 +422,51 @@ function cambiarPassword(){
 
 function guardarNuevoPassword(){
     let nuevoPassword = document.getElementById('nuevaClave').value;
-    
+    let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave').value;
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
     let sesiones = JSON.parse(localStorage.getItem('sesiones'));
     for (let index = 0; index < usuarios.length; index++) {
+        
         if(sesiones[0].id == usuarios[index].id){
-            if(usuarios[index].usuario == nuevoPassword){
-                alert('La clave no puede ser igual al nombre de usuario');
-            }else if(nuevoPassword == ''){
-                alert('Debe ingresar una clave');
-            }else {
-            usuarios[index].password = nuevoPassword;
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-            document.getElementById('nuevaClave').value = '';
-            $('#modalCambiarPassword').modal('hide');
-            }
-        }   
+            if(confirmaNuevoPassword == nuevoPassword){
+                if(usuarios[index].usuario == nuevoPassword){
+                    alert('La clave no puede ser igual al nombre de usuario');
+                    document.getElementById('nuevaClave').value = '';
+                    document.getElementById('confirmaNuevaClave').value = '';
+                }else if(nuevoPassword == ''){
+                    alert('Debe ingresar una clave');
+                    document.getElementById('nuevaClave').value = '';
+                    document.getElementById('confirmaNuevaClave').value = '';
+                }else {
+                    usuarios[index].password = nuevoPassword;
+                    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                    document.getElementById('nuevaClave').value = '';
+                    $('#modalCambiarPassword').modal('hide');
+                }
+            } else{
+                alert('Las clave y su confirmacion son diferentes');
+                document.getElementById('nuevaClave').value = '';
+                document.getElementById('confirmaNuevaClave').value = '';
+                
+            }   
+        } 
     }
+}
+
+function verClave(){
+    let verClave = document.getElementById('mostrarClave').checked;
+    if(verClave){
+        let nuevoPassword = document.getElementById('nuevaClave');
+        let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave');
+        nuevoPassword.setAttribute('type','text');
+        confirmaNuevoPassword.setAttribute('type','text');
+        
+    }else{
+        let nuevoPassword = document.getElementById('nuevaClave');
+        let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave');
+        nuevoPassword.setAttribute('type','password');
+        confirmaNuevoPassword.setAttribute('type','password');
+
+    }
+    
 }

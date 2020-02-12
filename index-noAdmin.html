@@ -89,7 +89,13 @@
                 <form id="">
                     <div class="form-group">
                         <label class="text-warning" for="exampleInputEmail1">Tienes que ingresar una nueva clave</label>
-                        <input type="text" class="form-control" id="nuevaClave">
+                        <input type="password" class="form-control" id="nuevaClave"> 
+                        <label class="text-warning" for="exampleInputEmail1">Confirmar la nueva clave</label>
+                        <input type="password" class="form-control" id="confirmaNuevaClave">
+                        <div class="form-group form-check">
+                            <input type="checkbox" onchange="verClave()" class="form-check-input" id="mostrarClave">
+                            <label class="form-check-label"  for="exampleCheck1">Mostrar contraseña</label>
+                          </div>
                     </div>
                 </form>
                 <div class="modal-footer">
