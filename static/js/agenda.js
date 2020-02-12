@@ -66,7 +66,7 @@ function cargar() {
     })
     console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 10;
+    let cupo = 1;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -219,6 +219,7 @@ function cargar() {
     }
     localStorage.setItem('agenda', JSON.stringify(agenda));
   }
+  
 }
 
 function agregarClase() {
