@@ -489,3 +489,7 @@ function cerrarModalCambioClave(){
         }
     }
 }
+
+function ordenarClases(){
+    
+}
