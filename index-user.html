@@ -24,7 +24,7 @@
     <title>Turnos Gym</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" onload="cambiarPassword()">
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="">
@@ -41,6 +41,9 @@
                 </li>
                 <li class="m-1">
                     <a class="" href=""><i class="fas fa-list-alt"></i>Ver reservas</a>
+                </li>
+                <li class="m-1">
+                    <a class="" href=""><i class="fas fa-clock"></i> Cuenta</a>
                 </li>
             </ul>
         </nav>
@@ -96,6 +99,36 @@
                 </table>
             </div>
         </div>
+
+        <!-- Modal CAMBIAR Password-->
+    <div class="modal fade" id="modalCambiarPassword" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-secondary">
+            <div class="container py-3 px-3">
+                <form id="">
+                    <div class="form-group">
+                        <label class="text-warning" for="exampleInputEmail1">Tienes que ingresar una nueva clave</label>
+                        <input type="password" class="form-control" id="nuevaClave"> 
+                        <label class="text-warning" for="exampleInputEmail1">Confirmar la nueva clave</label>
+                        <input type="password" class="form-control" id="confirmaNuevaClave">
+                        <div class="form-group form-check">
+                            <input type="checkbox" onchange="verClave()" class="form-check-input" id="mostrarClave">
+                            <label class="form-check-label"  for="exampleCheck1">Mostrar contraseña</label>
+                          </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" id="cerrarModal" class="btn btn-secondary" onclick="cerrarModalCambioClave()" >Cerrar</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="guardarNuevoPassword()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         
     </div>
 
@@ -117,12 +150,11 @@
     <script src="static/js/users.js"></script>
     <script src="static/js/moment.js"></script>
     <script type="text/javascript">
-<<<<<<< HEAD
+
         /* verSesiones() */
-=======
-        verSesiones()
+        
         listarClasesDisponibles()
->>>>>>> userpage
+
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');

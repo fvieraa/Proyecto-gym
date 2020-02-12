@@ -72,7 +72,7 @@ function logeo() {
                 alert("usuario o contraseña invalidos")
 
             } else {
-                window.location.href = "index-noAdmin.html";
+                window.location.href = "index-user.html";
             let usuarioSesionAbierta = usuarios.find(u => (u.usuario == usuario))
             let sesiones = []
             let nuevaSesion = new Sesion(usuarioSesionAbierta.id,
