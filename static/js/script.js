@@ -466,7 +466,26 @@ function verClave(){
         let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave');
         nuevoPassword.setAttribute('type','password');
         confirmaNuevoPassword.setAttribute('type','password');
-
+        
     }
     
+}
+
+function cerrarModalCambioClave(){
+    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+    let sesiones = JSON.parse(localStorage.getItem('sesiones'));
+    for (let index = 0; index < usuarios.length; index++) {
+        
+        if(sesiones[0].id == usuarios[index].id){
+            if(usuarios[index].usuario == usuarios[index].password){
+                alert('Debes cambiar la clave')
+            }else{
+    
+            document.getElementById('nuevaClave').value = '';
+            document.getElementById('confirmaNuevaClave').value = '';
+            document.getElementById('mostrarClave').checked = false;
+            $('#modalCambiarPassword').modal('hide');
+            }
+        }
+    }
 }
