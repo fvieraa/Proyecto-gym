@@ -50,32 +50,24 @@
 
         <!-- Page Content  -->
         <div id="content">
-            <nav class="navbar navbar-expand-lg" style="background-color: white;">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg justify-content-md-between justify-content-around "
+                style="background-color: white;">
+                <button type="button" id="sidebarCollapse" class="btn btn-success col-md-1 col-4">
+                    <i class="fas fa-dumbbell"></i>
+                </button>
+                <a href="index-admin.html" class="col-md-4 col-sm-4 col-1">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-success">
-                        <!-- <i class="fas fa-align-left"></i> -->
-                        <i class="fas fa-dumbbell"></i>
-                        <span></span>
-                    </button>  
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
+                        alt="">
+                </a>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user"></i>
-                    </button>
-
-                    <div class="logoNav">
-                        <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
-                            alt="">
-                    </div>
-
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="">Usuario</a>
-                            </li>
-                        </ul>
+                        Administrador
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a>
                     </div>
                 </div>
             </nav>
@@ -91,15 +83,15 @@
                 <table class="table table-sm" ">
                     <thead>
                         <tr>
-                            <th scope="col">Nombre Completo</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">DNI</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
+                            <th scope=" col">Nombre Completo</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Acciones</th>
+                    </tr>
                     </thead>
                     <tbody id="tablaUsuarios">
                         <tr>
-                            
+
                         </tr>
                     </tbody>
                 </table>
@@ -112,27 +104,28 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content bg-secondary">
                         <div class="container py-3 px-3">
-                          <form id="">
-                            <div class="form-group">
-                                <label class="text-warning" for="exampleInputEmail1">Nombre Completo</label>
-                                <input type="text" class="form-control" id="agregarNombreUsuario">
-                              </div>  
-                              <div class="form-group">
-                                  
-                                <label class="text-warning" for="exampleInputEmail1">DNI</label>
-                                <input type="text" class="form-control" id="agregarDniUsuario">
-                              </div>
-                            <div class="form-group">
-                              <label class="text-warning" for="exampleInputEmail1">Usuario</label>
-                              <input type="text" class="form-control" id="agregarUsuarioUsuario">
+                            <form id="">
+                                <div class="form-group">
+                                    <label class="text-warning" for="exampleInputEmail1">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="agregarNombreUsuario">
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="text-warning" for="exampleInputEmail1">DNI</label>
+                                    <input type="text" class="form-control" id="agregarDniUsuario">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-warning" for="exampleInputEmail1">Usuario</label>
+                                    <input type="text" class="form-control" id="agregarUsuarioUsuario">
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="agregarUsuario()">Guardar</button>
                             </div>
-                          </form>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" onclick="agregarUsuario()">Guardar</button>
-                          </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
 
@@ -152,10 +145,10 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
                 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                 crossorigin="anonymous">
-                </script>    
+                </script>
             <script src="static/js/script.js"></script>
             <script type="text/javascript">
-                
+
 
                 $(document).ready(function () {
                     $('#sidebarCollapse').on('click', function () {

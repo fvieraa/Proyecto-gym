@@ -72,7 +72,7 @@ a[data-toggle="collapse"] {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
     }
@@ -82,4 +82,4 @@ a[data-toggle="collapse"] {
     #sidebarCollapse span {
         display: none;
     }
-}   
+}    */

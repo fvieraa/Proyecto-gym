@@ -50,32 +50,24 @@
 
         <!-- Page Content  -->
         <div id="content">
-            <nav class="navbar navbar-expand-lg" style="background-color: white;">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg justify-content-md-between justify-content-around "
+                style="background-color: white;">
+                <button type="button" id="sidebarCollapse" class="btn btn-success col-md-1 col-4">
+                    <i class="fas fa-dumbbell"></i>
+                </button>
+                <a href="index-admin.html" class="col-md-4 col-sm-4 col-1">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-success">
-                        <!-- <i class="fas fa-align-left"></i> -->
-                        <i class="fas fa-dumbbell"></i>
-                        <span></span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
+                        alt="">
+                </a>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user"></i>
-                    </button>
-
-                    <div class="logoNav">
-                        <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
-                            alt="">
-                    </div>
-
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="">Usuario</a>
-                            </li>
-                        </ul>
+                        Administrador
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a>
                     </div>
                 </div>
             </nav>
