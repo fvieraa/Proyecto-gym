@@ -1,10 +1,10 @@
 class Agenda {
-
   constructor(fecha, turno, clase, cupo) {
     this.fecha = fecha;
     this.turno = turno;
     this.clase = clase;
     this.cupo = cupo;
+    this.reservado = [];
   }
 }
 
@@ -101,7 +101,7 @@ function cargar() {
     })
     console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 10;
+    let cupo = 1;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -134,7 +134,7 @@ function cargar() {
     })
     console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 10;
+    let cupo = 1;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -167,7 +167,7 @@ function cargar() {
     })
     console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 10;
+    let cupo = 1;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -199,7 +199,7 @@ function cargar() {
       }
     })
     let clase = document.getElementById('optionClases').value;
-    let cupo = 10;
+    let cupo = 1;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
