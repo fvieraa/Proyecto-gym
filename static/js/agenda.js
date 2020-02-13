@@ -1,10 +1,13 @@
 class Agenda {
 
-  constructor(fecha, turno, clase, cupo) {
+  constructor(fecha, turno, clase, cupo, dia, mes, anio) {
     this.fecha = fecha;
     this.turno = turno;
     this.clase = clase;
     this.cupo = cupo;
+    this.dia = dia;
+    this.mes = mes;
+    this.anio = anio;
   }
 }
 
@@ -218,7 +221,8 @@ function cargar() {
       }
     }
     localStorage.setItem('agenda', JSON.stringify(agenda));
-  }
+  }  $('#modalCambiarPassword').modal('hide');
+  window.location.href = "agenda.html";
 }
 
 function agregarClase() {
@@ -246,7 +250,7 @@ function agregarClase() {
       location.reload();
 
     } else {
-      alert("clase ya existe")
+      alert("clase ya existe");
 
     }
 
@@ -262,7 +266,7 @@ function listarEntradas() {
   if (!agenda) {
     agenda = [];
   }
-
+    agenda = ordenarAgenda();
   //Genero el contenido de la tabla
   let tabla = "";
   for (let index = 0; index < agenda.length; index++) {
@@ -288,4 +292,28 @@ function listarEntradas() {
 
   //Muestro el contenido de la tabla
   document.getElementById('tablaAgenda').innerHTML = tabla;
+}
+function ordenarAgenda(indice){
+  let agenda = JSON.parse(localStorage.getItem('agenda'));
+  
+  
+  let agendaOrdenada = agenda.sort(function(a,b){
+    if(new Date(a.fecha).getDate() != new Date(b.fecha).getDate()){
+      if((new Date(a.fecha)) < (new Date(b.fecha))){
+      return -1;
+      } else {
+        return 1;
+      }
+    } else if (a.turno < b.turno){
+      return -1
+    }
+   else if(a.turno > b.turno) {
+    return 1
+  }else {
+    return 0
+  }
+      })
+  
+    
+ return agendaOrdenada;
 }

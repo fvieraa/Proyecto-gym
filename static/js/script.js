@@ -490,6 +490,3 @@ function cerrarModalCambioClave(){
     }
 }
 
-function ordenarClases(){
-    
-}
