@@ -117,11 +117,11 @@
                             <label class="text-warning" for="exampleInputEmail1">Turno</label>
                             <select class="form-control" id="optionTurno">
 
-                                <option>1- 14:00</option>
-                                <option>2- 16:00</option>
-                                <option>3- 18:00</option>
-                                <option>4- 20:00</option>
-                                <option>5- 22:00</option>
+                                <option>14:00</option>
+                                <option>16:00</option>
+                                <option>18:00</option>
+                                <option>20:00</option>
+                                <option>22:00</option>
                             </select>
                         </div>
                         <div class="for-group d-flex justify-content-between">                            
@@ -173,8 +173,8 @@
     <script src="static/js/agenda.js"></script>
     <script src="static/js/script.js    "></script>
     <script type="text/javascript">
-        verSesiones()
-        listarEntradas(1)
+     /*    verSesiones() */
+        listarEntradas()
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
