@@ -259,14 +259,14 @@ function agregarClase() {
   }
 }
 
-function listarEntradas() {
+function listarEntradas(indice) {
 
   let agenda = JSON.parse(localStorage.getItem('agenda'));
   //Controlo si no tengo aún notas almacenadas
   if (!agenda) {
     agenda = [];
   }
-    agenda = ordenarAgenda();
+    agenda = ordenarAgenda(indice);
   //Genero el contenido de la tabla
   let tabla = "";
   for (let index = 0; index < agenda.length; index++) {
@@ -293,26 +293,41 @@ function listarEntradas() {
   //Muestro el contenido de la tabla
   document.getElementById('tablaAgenda').innerHTML = tabla;
 }
+
 function ordenarAgenda(indice){
   let agenda = JSON.parse(localStorage.getItem('agenda'));
-  
-  
-  let agendaOrdenada = agenda.sort(function(a,b){
-    if(new Date(a.fecha).getDate() != new Date(b.fecha).getDate()){
-      if((new Date(a.fecha)) < (new Date(b.fecha))){
-      return -1;
-      } else {
-        return 1;
+  let agendaOrdenada;
+  if(indice == 1){
+      agendaOrdenada = agenda.sort(function(a,b){
+        if(new Date(a.fecha).getDate() != new Date(b.fecha).getDate()){
+          if((new Date(a.fecha)) < (new Date(b.fecha))){
+          return -1;
+          } else {
+            return 1;
+          }
+        } else if (a.turno < b.turno){
+          return -1
+        }
+       else if(a.turno > b.turno) {
+        return 1
+      }else {
+        return 0
       }
-    } else if (a.turno < b.turno){
-      return -1
-    }
-   else if(a.turno > b.turno) {
-    return 1
-  }else {
-    return 0
-  }
+          })
+    } else{
+      agendaOrdenada= agenda.sort(function(a,b) {
+        if(a.clase < b.clase){
+          return -1;
+        }else if(a.clase > b.clase){
+          return 1;
+        }else {
+          return 0;
+        }
       })
+    }
+
+       
+  
   
     
  return agendaOrdenada;

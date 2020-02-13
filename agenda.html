@@ -26,7 +26,7 @@
     <title>Turnos Gym</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" onload="listarEntradas(1)">
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="">
@@ -81,8 +81,8 @@
             <table class="table table-sm" ">
                 <thead>
                     <tr>
-                        <th scope="col">Dia</th>
-                        <th scope="col">Clase</th>
+                        <th scope="col" onclick="listarEntradas(1)">Dia</th>
+                        <th scope="col" onclick="listarEntradas(3)">Clase</th>
                         <th scope="col">Turno</th>
                         <th scope="col">Cupo</th>
                     </tr>
@@ -174,7 +174,7 @@
     <script src="static/js/script.js    "></script>
     <script type="text/javascript">
         verSesiones()
-        listarEntradas()
+        listarEntradas(1)
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
