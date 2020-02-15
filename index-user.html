@@ -50,35 +50,31 @@
 
         <!-- Page Content  -->
         <div id="content">
-            <nav class="navbar navbar-expand-lg justify-content-between " style="background-color: white;">
-                <button type="button" id="sidebarCollapse" class="btn btn-success">
-                    <!-- <i class="fas fa-align-left"></i> -->
+            <nav class="navbar navbar-expand-lg justify-content-md-between justify-content-around "
+                style="background-color: white;">
+                <button type="button" id="sidebarCollapse" class="btn btn-success col-md-1 col-4">
                     <i class="fas fa-dumbbell"></i>
-                    <span></span>
                 </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-user"></i>
-                </button>
-                <div class="">
+                <a href="index-admin.html" class="col-md-4 col-sm-4 col-1">
+
                     <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
                         alt="">
-                </div>
+                </a>
                 <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Usuario
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        Administrador
                     </a>
-                  
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a>
+                        <a class="dropdown-item" onclick="cerrarSesion()">Cerrar Sesion</a>
                     </div>
-                  </div>
+                </div>
             </nav>
             <div>
                 <div class="alert alert-secondary d-flex justify-content-between mt-3" role="alert">
-                   Listado Clases
-                    
+                    Listado Clases
+
                 </div>
                 <div>
 
@@ -86,53 +82,56 @@
                 <table class="table table-sm">
                     <thead class="thead-light">
                         <tr>
-                        <th>Clase</th>
-                        <th>Dia</th>
-                        <th>Horario</th>
-                        <th>Acción</th>
+                            <th>Clase</th>
+                            <th>Dia</th>
+                            <th>Horario</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="ClasesDisponibles">
-        
+
                     </tbody>
-               
+
                 </table>
             </div>
         </div>
 
         <!-- Modal CAMBIAR Password-->
-    <div class="modal fade" id="modalCambiarPassword" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content bg-secondary">
-            <div class="container py-3 px-3">
-                <form id="">
-                    <div class="form-group">
-                        <label class="text-warning" for="exampleInputEmail1">Tienes que ingresar una nueva clave</label>
-                        <input type="password" class="form-control" id="nuevaClave"> 
-                        <label class="text-warning" for="exampleInputEmail1">Confirmar la nueva clave</label>
-                        <input type="password" class="form-control" id="confirmaNuevaClave">
-                        <div class="form-group form-check">
-                            <input type="checkbox" onchange="verClave()" class="form-check-input" id="mostrarClave">
-                            <label class="form-check-label"  for="exampleCheck1">Mostrar contraseña</label>
-                          </div>
+        <div class="modal fade" id="modalCambiarPassword" tabindex="-1" role="dialog"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content bg-secondary">
+                    <div class="container py-3 px-3">
+                        <form id="">
+                            <div class="form-group">
+                                <label class="text-warning" for="exampleInputEmail1">Tienes que ingresar una nueva
+                                    clave</label>
+                                <input type="password" class="form-control" id="nuevaClave">
+                                <label class="text-warning" for="exampleInputEmail1">Confirmar la nueva clave</label>
+                                <input type="password" class="form-control" id="confirmaNuevaClave">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" onchange="verClave()" class="form-check-input"
+                                        id="mostrarClave">
+                                    <label class="form-check-label" for="exampleCheck1">Mostrar contraseña</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" id="cerrarModal" class="btn btn-secondary"
+                                onclick="cerrarModalCambioClave()">Cerrar</button>
+                            <button type="button" class="btn btn-primary"
+                                onclick="guardarNuevoPassword()">Guardar</button>
+                        </div>
                     </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" id="cerrarModal" class="btn btn-secondary" onclick="cerrarModalCambioClave()" >Cerrar</button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="guardarNuevoPassword()">Guardar</button>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-        
+
     </div>
 
-  
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -149,11 +148,13 @@
     <script src="static/js/script.js"></script>
     <script src="static/js/users.js"></script>
     <script src="static/js/moment.js"></script>
+    <!-- <script src="static/js/agenda.js"></script> -->
     <script type="text/javascript">
 
         /* verSesiones() */
-        
+
         listarClasesDisponibles()
+        // domingo()
 
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

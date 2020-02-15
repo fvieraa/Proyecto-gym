@@ -21,3 +21,23 @@ function proximasClases() {
 
 
 }
+
+function ultimosUsuarios(){
+
+  let usuarios = JSON.parse(localStorage.getItem('usuarios'))
+
+  let contenido = ""
+
+  for (let index = 0; index < usuarios.length; index++) {
+
+    const element = usuarios[index];
+    
+    contenido += `<h6>${element.usuario}</h6>`
+  }
+
+  document.getElementById('ultimoUsuario').innerHTML = contenido;
+
+
+
+
+}

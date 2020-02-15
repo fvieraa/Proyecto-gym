@@ -18,11 +18,12 @@ class Clase {
     }
 }
 class Sesion {
-    constructor(id, usuario, administrador) {
+    constructor(id, usuario, estado, administrador) {
 
 
         this.id = id
         this.usuario = usuario;
+        this.estado = estado;
         this.administrador = administrador
     }
 }
@@ -76,7 +77,7 @@ function logeo() {
             let usuarioSesionAbierta = usuarios.find(u => (u.usuario == usuario))
             let sesiones = []
             let nuevaSesion = new Sesion(usuarioSesionAbierta.id,
-                usuarioSesionAbierta.usuario, false)
+                usuarioSesionAbierta.usuario,usuarioSesionAbierta.estado, false)
             sesiones.push(nuevaSesion)
             localStorage.setItem('sesiones', JSON.stringify(sesiones));
             }
@@ -414,7 +415,7 @@ function cambiarPassword(){
         usuarios = [];
     }
     let usuarioActivo = usuarios.find(u => (u.id == sesiones[0].id))
-    console.log(usuarioActivo);    
+    // console.log(usuarioActivo);    
     if(usuarioActivo.password == usuarioActivo.usuario){
         $('#modalCambiarPassword').modal('show');
     }

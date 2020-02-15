@@ -8,6 +8,20 @@ class Agenda {
   }
 }
 
+// function domingo(){
+
+//   let agenda = JSON.parse(localStorage.getItem('agenda'))
+//   let nueva = new Agenda('Sun Feb 16 2020 16:07:29 GMT-0300 (hora estándar de Argentina)', "10:00", "crossfit", 5)
+//   let nueva2 = new Agenda('Sun Feb 16 2020 16:07:29 GMT-0300 (hora estándar de Argentina)', "08:00", "funcional", 5)
+//   let nueva3 = new Agenda('Sun Feb 16 2020 16:07:29 GMT-0300 (hora estándar de Argentina)', "16:00", "boxeo", 5)
+//   agenda.push(nueva);
+//   agenda.push(nueva2);
+//   agenda.push(nueva3);
+//   localStorage.setItem('agenda', JSON.stringify(agenda));
+
+
+// }
+
 /* Esta funcion se encarga de colocar las clases que se cargaron, en el modal del alta de horarios */
 function llenarModal() {
 
@@ -284,7 +298,7 @@ function listarEntradas(indice) {
       agen.fecha = "Viernes" +" "+agenda[index].fecha.split(" ")[2] +" "+ agenda[index].fecha.split(" ")[1]
     }
 
-    tabla += `<tr><td>${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
+    tabla += `<tr><td class="text-justify">${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
   }
 
   //Muestro el contenido de la tabla
@@ -322,10 +336,6 @@ function ordenarAgenda(indice){
         }
       })
     }
-
-       
-  
-  
     
  return agendaOrdenada;
 }
