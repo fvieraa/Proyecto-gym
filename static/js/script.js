@@ -29,13 +29,22 @@ class Sesion {
 }
 
 function verSesiones() {
+    // let a = sesiones.find(adm => adm.id == s)
+    
+    
+    
     let sesiones = JSON.parse(localStorage.getItem('sesiones'))
-    let s = sesiones.findIndex(sesion => sesion.id == 0)
-    let a = sesiones.find(adm => adm.id == s)
 
-    if (a.administrador) {
-        // console.log("eres administrador")
-    }
+    
+    let usuario = " " 
+    
+    usuario += ` <i class="fas fa-user"></i>  `
+    usuario += sesiones[0].usuario
+    document.getElementById('dropdownMenuLink').innerHTML = usuario;
+
+
+    
+    console.log()
 
 }
 

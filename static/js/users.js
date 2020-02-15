@@ -3,7 +3,6 @@ function listarClasesDisponibles() {
     let agenda = JSON.parse(localStorage.getItem('agenda'))
     let sesiones = JSON.parse(localStorage.getItem('sesiones'))
 
-    let usuarios = JSON.parse(localStorage.getItem('usuarios'));
 
 
 
