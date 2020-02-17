@@ -25,13 +25,14 @@ function proximasClases() {
 function ultimosUsuarios(){
 
   let usuarios = JSON.parse(localStorage.getItem('usuarios'))
+  let reverse = usuarios.reverse()
   console.log(usuarios)
 
   let contenido = ""
 
-  for (let index = 0; index < usuarios.length; index++) {
+  for (let index = 0; index < 3; index++) {
 
-    const element = usuarios[index];
+    const element = reverse[index];
     
     contenido += `<h6>${element.usuario}</h6>`
   }

@@ -2,12 +2,7 @@ function listarClasesDisponibles() {
 
     let agenda = JSON.parse(localStorage.getItem('agenda'))
     let sesiones = JSON.parse(localStorage.getItem('sesiones'))
-
-
-
-
     let usuarioActivo = sesiones[0].usuario
-
 
     let tablaBody = ""
     if (sesiones[0].estado) {
