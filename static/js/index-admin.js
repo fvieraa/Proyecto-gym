@@ -4,7 +4,7 @@ function proximasClases() {
     let mañana = fechaMañana.toString().split(" ")[2] + " " + fechaMañana.toString().split(" ")[1]
     
     let contenidoMañana = "";
-    contenidoMañana += `<h5>Mañana : ${mañana}</h5>`
+    contenidoMañana += `<h6 class="card-subtitle mb-2 text-muted"> ${mañana}</h6>`
     let agenda = JSON.parse(localStorage.getItem('agenda'))
 
     for (let index = 0; index < agenda.length; index++) {

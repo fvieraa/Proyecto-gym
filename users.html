@@ -57,9 +57,7 @@
                     <i class="fas fa-dumbbell"></i>
                 </button>
                 <a href="index-admin.html" class="col-md-4 col-sm-4 col-1">
-
-                    <img style="height: 4rem;" class="img-fluid" src="static/image/logo con titulo al costado.png"
-                        alt="">
+                    <img style="height: 4rem;" class="img-fluid" src="static/image/logocontituloal costado.png" alt="">
                 </a>
                 <div class="dropdown show">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -73,29 +71,47 @@
                 </div>
             </nav>
             <div>
-                <div class="alert alert-secondary d-flex justify-content-between mt-3" role="alert">
-                    Listado de usuarios
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAgregarUsuario"><i
-                            class="fas fa-plus-circle"></i> Agregar Usuario</button>
-                </div>
-                <div>
+                <div class="container mt-3">
 
-                </div>
-                <table class="table table-sm" ">
-                    <thead>
-                        <tr>
-                            <th scope=" col">Nombre Completo</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">DNI</th>
-                    <th scope="col">Acciones</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tablaUsuarios">
-                        <tr>
 
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-borderless  text-left font-weight-bold text-uppercase bg-light text-success">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="bg-secondary text-white">
+                                    <div class="d-md-flex justify-content-between">
+                                        <div class="">
+                                            <h3>Listado de Clases</h3>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th class="bg-secondary">
+
+                                </th>
+                                <th class="bg-secondary">
+
+                                </th>
+
+                                <th class="bg-secondary w-25">
+                                    <button class="btn btn-success" data-toggle="modal"
+                                        data-target="#modalAgregarUsuario"><i class="fas fa-plus-circle"></i> Agregar
+                                        Usuario</button>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col"><h5>Nombre</h5></th>
+
+                                <th scope="col"><h5>Usuario</h5></th>
+                                <th scope="col"><h5>DNI</h5></th>
+                                <th scope="col"><h5>Acciones</h5></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaUsuarios">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
 

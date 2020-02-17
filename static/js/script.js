@@ -162,7 +162,7 @@ function listarClases() {
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
                                 <a class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o"></i></a>
+                                        class="fa fa-trash"></i></a>
                             </td>
         `
 
@@ -301,9 +301,9 @@ function listarUsuarios() {
                                         title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
                                     <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                    <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                    <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger" role="button" data-toggle="tooltip"
                                         data-placement="top" title="" data-original-title="Borrar"><i
-                                            class="fa fa-trash-o"></i></a>
+                                            class="fa fa-trash"></i></a>
                                 </td></tr>
             `
         } else {
@@ -316,7 +316,7 @@ function listarUsuarios() {
                                         title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
                                     <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                         data-placement="top" title="" data-original-title="Borrar"><i
-                                            class="fa fa-trash-o"></i></a>
+                                            class="fa fa-trash"></i></a>
                                 </td></tr>
             `
         }
@@ -395,7 +395,6 @@ function suspensionUsuario(codigo) {
     event.preventDefault()
 
     let usuarios = JSON.parse(localStorage.getItem("usuarios"))
-    let tabla = "";
     let idUsuarios = usuarios.findIndex(u => u.id == codigo);
     let usuario = usuarios[idUsuarios];
     
@@ -413,6 +412,9 @@ function suspensionUsuario(codigo) {
         listarUsuarios()
     }
 
+
+
+    
 
 
 }

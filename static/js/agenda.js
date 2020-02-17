@@ -42,13 +42,13 @@ function cargar() {
 
 
   event.preventDefault();
-/* Buscar/Crear la agenda en el LocalStorage */
+  /* Buscar/Crear la agenda en el LocalStorage */
   let agenda = JSON.parse(localStorage.getItem('agenda'))
   if (!agenda) {
     agenda = []
   };
   console.log(agenda)
-  
+
   /* Definir las variables true para cada dia */
   let lunes = document.getElementById('lunes').checked;
   let martes = document.getElementById('martes').checked;
@@ -94,7 +94,7 @@ function cargar() {
           console.log("ya hay algo en esa fecha y horario")
         } else {
 
-            agenda.push(nuevaEntrada);
+          agenda.push(nuevaEntrada);
         }
       }
     }
@@ -129,7 +129,7 @@ function cargar() {
           console.log("ya hay algo en esa fecha y horario")
         } else {
 
-            agenda.push(nuevaEntrada);
+          agenda.push(nuevaEntrada);
         }
       }
     }
@@ -162,7 +162,7 @@ function cargar() {
           console.log("ya hay algo en esa fecha y horario")
         } else {
 
-            agenda.push(nuevaEntrada);
+          agenda.push(nuevaEntrada);
         }
       }
     }
@@ -195,7 +195,7 @@ function cargar() {
           console.log("ya hay algo en esa fecha y horario")
         } else {
 
-            agenda.push(nuevaEntrada);
+          agenda.push(nuevaEntrada);
         }
       }
     }
@@ -227,12 +227,12 @@ function cargar() {
           console.log("ya hay algo en esa fecha y horario")
         } else {
 
-            agenda.push(nuevaEntrada);
+          agenda.push(nuevaEntrada);
         }
       }
     }
     localStorage.setItem('agenda', JSON.stringify(agenda));
-  }  $('#modalCambiarPassword').modal('hide');
+  } $('#modalCambiarPassword').modal('hide');
   window.location.href = "agenda.html";
 }
 
@@ -273,29 +273,95 @@ function agregarClase() {
 function listarEntradas(indice) {
 
   let agenda = JSON.parse(localStorage.getItem('agenda'));
+  agenda = ordenarAgenda(indice);
+
+  let clases = JSON.parse(localStorage.getItem('clases'));
+  // console.log(clases)
+  let botonCollapse = ""
+  for (let index = 0; index < clases.length; index++) {
+    const clase = clases[index];
+    console.log(clase.nombre)
+
+    botonCollapse += `
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseClases${clase.nombre}" role="button"
+    aria-expanded="false" aria-controls="collapseClases${clase.nombre}">
+    ${clase.nombre}</a>
+    `
+    botonCollapse += `
+    <div class="collapse" id="collapseClases${clase.nombre}">
+    <table class="table table-borderless text-left font-weight-bold text-uppercase bg-white text-success mt-3">
+    <thead class="thead-light">
+    <th scope="col">Dia</th>
+    <th scope="col">Fecha</th>
+    <th scope="col">Clase</th>
+    <th scope="col">Turno</th>
+                <th scope="col">Cupo</th>
+    </thead>
+    <tbody>
+    `
+    for (let index = 0; index < agenda.length; index++) {
+      const agen = agenda[index];
+      // console.log(clase)
+      if (agenda[index].fecha.split(" ")[0] == "Mon") {
+        agen.dia = "Lunes" + " "  
+        agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
+      }
+      if (agenda[index].fecha.split(" ")[0] == "Tue") {
+        agen.dia = "Martes" + " " 
+        agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
+
+      }
+      if (agenda[index].fecha.split(" ")[0] == "Wed") {
+        agen.dia = "Miercoles" + " " 
+        agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
+
+      }
+      if (agenda[index].fecha.split(" ")[0] == "Thu") {
+        agen.dia = "Jueves" + " " 
+        agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
+
+      }
+      if (agenda[index].fecha.split(" ")[0] == "Fri") {
+        agen.dia = "Viernes" + " " 
+        agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
+
+      }
+  
+      if (clase.nombre == agen.clase) {
+        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
+
+      }
+
+    }
+    botonCollapse += "</tbody></table>"
+    botonCollapse += `</div>`
+  }
+
+  document.getElementById('collapseClases').innerHTML = botonCollapse;
+
   //Controlo si no tengo aún notas almacenadas
   if (!agenda) {
     agenda = [];
   }
-    agenda = ordenarAgenda(indice);
+  agenda = ordenarAgenda(indice);
   //Genero el contenido de la tabla
   let tabla = "";
   for (let index = 0; index < agenda.length; index++) {
     let agen = agenda[index];
     if (agenda[index].fecha.split(" ")[0] == "Mon") {
-      agen.fecha = "Lunes" +" "+agenda[index].fecha.split(" ")[2] +" "+ agenda[index].fecha.split(" ")[1]
+      agen.fecha = "Lunes" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
     }
     if (agenda[index].fecha.split(" ")[0] == "Tue") {
-      agen.fecha = "Martes" +" "+agenda[index].fecha.split(" ")[2] +" "+ agenda[index].fecha.split(" ")[1]
+      agen.fecha = "Martes" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
     }
     if (agenda[index].fecha.split(" ")[0] == "Wed") {
-      agen.fecha = "Miercoles" +" "+agenda[index].fecha.split(" ")[2] +" "+ agenda[index].fecha.split(" ")[1]
+      agen.fecha = "Miercoles" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
     }
     if (agenda[index].fecha.split(" ")[0] == "Thu") {
-      agen.fecha = "Jueves" +" "+agenda[index].fecha.split(" ")[2] +" "+ agenda[index].fecha.split(" ")[1]
+      agen.fecha = "Jueves" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
     }
     if (agenda[index].fecha.split(" ")[0] == "Fri") {
-      agen.fecha = "Viernes" +" "+agenda[index].fecha.split(" ")[2] +" "+ agenda[index].fecha.split(" ")[1]
+      agen.fecha = "Viernes" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
     }
 
     tabla += `<tr><td class="text-justify">${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
@@ -305,37 +371,37 @@ function listarEntradas(indice) {
   document.getElementById('tablaAgenda').innerHTML = tabla;
 }
 
-function ordenarAgenda(indice){
+function ordenarAgenda(indice) {
   let agenda = JSON.parse(localStorage.getItem('agenda'));
   let agendaOrdenada;
-  if(indice == 1){
-      agendaOrdenada = agenda.sort(function(a,b){
-        if(new Date(a.fecha).getDate() != new Date(b.fecha).getDate()){
-          if((new Date(a.fecha)) < (new Date(b.fecha))){
+  if (indice == 1) {
+    agendaOrdenada = agenda.sort(function (a, b) {
+      if (new Date(a.fecha).getDate() != new Date(b.fecha).getDate()) {
+        if ((new Date(a.fecha)) < (new Date(b.fecha))) {
           return -1;
-          } else {
-            return 1;
-          }
-        } else if (a.turno < b.turno){
-          return -1
+        } else {
+          return 1;
         }
-       else if(a.turno > b.turno) {
+      } else if (a.turno < b.turno) {
+        return -1
+      }
+      else if (a.turno > b.turno) {
         return 1
-      }else {
+      } else {
         return 0
       }
-          })
-    } else{
-      agendaOrdenada= agenda.sort(function(a,b) {
-        if(a.clase < b.clase){
-          return -1;
-        }else if(a.clase > b.clase){
-          return 1;
-        }else {
-          return 0;
-        }
-      })
-    }
-    
- return agendaOrdenada;
+    })
+  } else {
+    agendaOrdenada = agenda.sort(function (a, b) {
+      if (a.clase < b.clase) {
+        return -1;
+      } else if (a.clase > b.clase) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  return agendaOrdenada;
 }

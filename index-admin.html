@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -27,7 +28,7 @@
 <body class="bg-light">
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar" class="active">
+        <nav id="sidebar" class="">
             <div>
                 <h3></h3>
             </div>
@@ -60,8 +61,7 @@
                 </button>
                 <a href="index-admin.html" class="col-md-4 col-sm-4 col-1">
 
-                    <img style="height: 4rem;" class="img-fluid" src="static/image/logocontituloal costado.png"
-                        alt="">
+                    <img style="height: 4rem;" class="img-fluid" src="static/image/logocontituloal costado.png" alt="">
                 </a>
                 <div class="dropdown show">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -74,61 +74,66 @@
                     </div>
                 </div>
             </nav>
-            <!-- <div class="container mt-5"> -->
-            <div>
-                <div class="container m-3 bg-white p-3 w-50  ">
-                    <h3>Proximas clases</h3>
-                    <hr>
+            <div class="m-5 d-flex">
 
-                    <div id="mañana">
+                <div class="card m-2" style="width: 28rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">Proximas Clases</h3>
+                        <div id="mañana">
+                        </div>
+
                     </div>
-                    <hr>
+                    <div class="card-footer">
+                        <a href="agenda.html" class="btn btn-success btn-block"> ver mas</a>
 
-                    <a href="agenda.html" class="btn btn-success"> ver mas</a>
+                    </div>
+
                 </div>
-            </div>
-            <div>
-                <div class="container m-3 bg-white p-3 w-50  ">
-                    <h3>Ultimos Usuarios</h3>
-                    <hr>
+                <div class="card m-2" style="width: 28rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">Ultimos Usuarios</h3>
+                        <div id="ultimoUsuario">
+                        </div>
 
-                    <div id="ultimoUsuario">
                     </div>
-                    <hr>
+                    <div class="card-footer">
+                        <a href="agenda.html" class="btn btn-success btn-block"> ver mas</a>
 
-                    <a href="agenda.html" class="btn btn-success"> ver mas</a>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-            </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-            </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-            </script>
-        <script src="static/js/script.js"></script>
-        <script src="static/js/index-admin.js"></script>
-        <script type="text/javascript">
-            proximasClases()
-            ultimosUsuarios()
-
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
-            });
-
-
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
         </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+    <script src="static/js/script.js"></script>
+    <script src="static/js/index-admin.js"></script>
+    <script type="text/javascript">
+        proximasClases()
+        ultimosUsuarios()
+
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+
+    </script>
 </body>
 
 </html>
