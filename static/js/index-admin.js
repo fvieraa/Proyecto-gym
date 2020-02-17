@@ -25,6 +25,7 @@ function proximasClases() {
 function ultimosUsuarios(){
 
   let usuarios = JSON.parse(localStorage.getItem('usuarios'))
+  console.log(usuarios)
 
   let contenido = ""
 

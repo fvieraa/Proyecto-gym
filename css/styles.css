@@ -11,6 +11,24 @@ body {
     background-position: center;
     color: #fff;
     animation: movimiento 10s infinite linear alternate;
+    position: relative;
+    overflow-x: hidden;
+    right: -7px;
+    bottom: -3px;
+}
+body::before {
+    filter: blur(7px);
+    position: absolute;
+    bottom: -10px;
+    top: -10px;
+    right: -10px;
+    left: -10px;
+    content: "";
+    background-image: url("../image/7.jpg");
+    background-size: cover;
+    background-position: center;
+    
+
 }
 @keyframes movimiento{
     from {
@@ -38,5 +56,25 @@ a .fab {
     color: #ffc;
     font-size: 30px;
     margin: 0 10px;
+}
+
+
+.footer-contacto  {
+    color:white;
+}
+.footer-nosotros{
+    color:white;
+}
+.footer-movil {
+    color:white;
+}
+
+
+.container .card:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+.img-fluid {
+    position: relative;
 }
 

@@ -10,7 +10,7 @@ body {
     
     background-size: cover;
     background-position: center; */
-    color: #fff;
+    /* color: #fff; */
     animation: movimiento 10s infinite linear alternate;
     position: relative;
     overflow-x: hidden;
@@ -18,7 +18,7 @@ body {
     bottom: -3px;
     
 }
-body::before {
+/* body::before {
     filter: blur(7px);
     position: absolute;
     bottom: -10px;
@@ -26,13 +26,13 @@ body::before {
     right: -10px;
     left: -10px;
     content: "";
-    background-image: url("../image/7.jpg");
-    background-size: cover;
+    /* background-image: url("../image/7.jpg"); */
+    /* background-size: cover;
     background-position: center;
     
 
-}
-
+} */
+ 
 
 
 /* @keyframes movimiento{
@@ -128,10 +128,8 @@ a[data-toggle="collapse"] {
     #sidebarCollapse span {
         display: none;
     }
-<<<<<<< HEAD
 }    */
-=======
-}   
+  
 
 .footer-contacto  {
     color:white;
@@ -152,4 +150,3 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
->>>>>>> origin/franco
