@@ -13,7 +13,9 @@ body {
     color: #fff;
     animation: movimiento 10s infinite linear alternate;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    right: -7px;
+    bottom: -3px;
     
 }
 body::before {
@@ -24,7 +26,7 @@ body::before {
     right: -10px;
     left: -10px;
     content: "";
-    background-image: url("/static/image/7.jpg");
+    background-image: url("../image/7.jpg");
     background-size: cover;
     background-position: center;
     
@@ -139,5 +141,8 @@ a[data-toggle="collapse"] {
 .container .card:hover{
     transform: translateY(-15px);
     box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+.img-fluid {
+    position: relative;
 }
 
