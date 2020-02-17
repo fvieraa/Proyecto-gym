@@ -1,4 +1,47 @@
 
+body, html {
+    
+    padding: 0;
+    margin: 0;
+    
+}
+body {
+    /* background: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0.52)), url("/static/image/7.jpg") ;
+    
+    background-size: cover;
+    background-position: center; */
+    color: #fff;
+    animation: movimiento 10s infinite linear alternate;
+    position: relative;
+    overflow-x: hidden;
+    right: -7px;
+    bottom: -3px;
+    
+}
+body::before {
+    filter: blur(7px);
+    position: absolute;
+    bottom: -10px;
+    top: -10px;
+    right: -10px;
+    left: -10px;
+    content: "";
+    background-image: url("../image/7.jpg");
+    background-size: cover;
+    background-position: center;
+    
+
+}
+
+
+
+/* @keyframes movimiento{
+    from {
+        background-position: bottom left;
+    } to{
+        background-position: top right;
+    }
+} */
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -53,6 +96,9 @@ a[aria-expanded="true"] {
 a[data-toggle="collapse"] {
     position: relative;
 }
+.letras {
+    color: black;
+}
 
 
 
@@ -82,4 +128,28 @@ a[data-toggle="collapse"] {
     #sidebarCollapse span {
         display: none;
     }
+<<<<<<< HEAD
 }    */
+=======
+}   
+
+.footer-contacto  {
+    color:white;
+}
+.footer-nosotros{
+    color:white;
+}
+.footer-movil {
+    color:white;
+}
+
+
+.container .card:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+.img-fluid {
+    position: relative;
+}
+
+>>>>>>> origin/franco
