@@ -162,7 +162,7 @@ function listarClases() {
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
                                 <a class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash"></i></a>
+                                        class="fas fa-trash text-white"></i></a>
                             </td>
         `
 
