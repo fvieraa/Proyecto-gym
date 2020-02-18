@@ -331,7 +331,7 @@ function listarEntradas(indice) {
       }
       
       if (clase.nombre == agen.clase) {
-        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
+        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.turno}</td><td><button class= 'btn btn-success' data-target='#modalInscriptos' data-toggle="modal" onClick= 'mostrarInscriptos(${agenda[index].id})'>${agen.cupo - agenda[index].reservado.length}</button> </td>`;
         
       }
 
@@ -377,4 +377,22 @@ function ordenarAgenda(indice) {
   }
 
   return agendaOrdenada;
+}
+
+function mostrarInscriptos(id){
+let tabla = document.getElementById('tablaInscriptos')
+
+let agenda = JSON.parse(localStorage.getItem('agenda'))
+if(!agenda){
+  agenda = [];
+}
+let claseAMostrar = agenda.find(clase => clase.id == id)
+let contenidoTabla = '';
+for (let index = 0; index < claseAMostrar.reservado.length; index++) {
+  contenidoTabla += `
+  <tr>
+  <th class='text-white' scope="row">${claseAMostrar.reservado[index].toUpperCase()}</th>
+  </tr>`
+}
+tabla.innerHTML = contenidoTabla;
 }
