@@ -1,12 +1,4 @@
-
-body, html {
-    
-    padding: 0;
-    margin: 0;
-    
-}
 body {
-    
     background-size: cover;
     background-position: center;
     /* color: #fff; */
@@ -14,6 +6,7 @@ body {
      background: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0.52)), url("/static/image/alergia-deporte.jpg") ;
     background-size: cover;
     background-position: center;
+    /* background-repeat: no-repeat ; */
     animation: movimiento 10s infinite linear alternate;
     position: relative;
     overflow-x: hidden;
@@ -71,7 +64,7 @@ a:focus {
     display: block;
 }
 
-
+/* 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
@@ -79,8 +72,8 @@ a[aria-expanded="true"] {
 }
 
 a[data-toggle="collapse"] {
-    position: relative;
-}
+    position: absolute;
+} */
 .letras {
     color: black;
 }
@@ -103,7 +96,7 @@ a[data-toggle="collapse"] {
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-/* @media (max-width: 768px) {
+ @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
     }
@@ -113,7 +106,7 @@ a[data-toggle="collapse"] {
     #sidebarCollapse span {
         display: none;
     }
-}    */
+}    
   
 
 .footer-contacto  {

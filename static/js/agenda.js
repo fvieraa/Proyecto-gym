@@ -91,7 +91,7 @@ function cargar() {
           fecha, turno, clase, cupo)
 
         if (cont >= 3) {
-          console.log("ya hay algo en esa fecha y horario")
+          alert("ya hay algo en esa fecha y horario")
         } else {
 
           agenda.push(nuevaEntrada);
@@ -278,9 +278,11 @@ function listarEntradas(indice) {
   let clases = JSON.parse(localStorage.getItem('clases'));
   // console.log(clases)
   let botonCollapse = ""
+  
   for (let index = 0; index < clases.length; index++) {
     const clase = clases[index];
-    console.log(clase.nombre)
+    // console.log(clase)
+
 
     botonCollapse += `
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseClases${clase.nombre}" role="button"
@@ -289,11 +291,11 @@ function listarEntradas(indice) {
     `
     botonCollapse += `
     <div class="collapse" id="collapseClases${clase.nombre}">
-    <table class="table table-borderless text-left font-weight-bold text-uppercase bg-white text-success mt-3">
+    <table class="table table-sm-responsive table-borderless text-left font-weight-bold text-uppercase bg-white text-success mt-3">
     <thead class="thead-light">
+    <tr><th>${clase.nombre}</th></tr>
     <th scope="col">Dia</th>
     <th scope="col">Fecha</th>
-    <th scope="col">Clase</th>
     <th scope="col">Turno</th>
                 <th scope="col">Cupo</th>
     </thead>
@@ -301,35 +303,36 @@ function listarEntradas(indice) {
     `
     for (let index = 0; index < agenda.length; index++) {
       const agen = agenda[index];
+      
       // console.log(clase)
       if (agenda[index].fecha.split(" ")[0] == "Mon") {
-        agen.dia = "Lunes" + " "  
+        agen.dia = "Lunes" + " " 
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
       }
       if (agenda[index].fecha.split(" ")[0] == "Tue") {
         agen.dia = "Martes" + " " 
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-
+        
       }
       if (agenda[index].fecha.split(" ")[0] == "Wed") {
         agen.dia = "Miercoles" + " " 
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-
+        
       }
       if (agenda[index].fecha.split(" ")[0] == "Thu") {
         agen.dia = "Jueves" + " " 
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-
+        
       }
       if (agenda[index].fecha.split(" ")[0] == "Fri") {
         agen.dia = "Viernes" + " " 
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-
+        
       }
-  
+      
       if (clase.nombre == agen.clase) {
-        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
-
+        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
+        
       }
 
     }
@@ -339,36 +342,6 @@ function listarEntradas(indice) {
 
   document.getElementById('collapseClases').innerHTML = botonCollapse;
 
-  //Controlo si no tengo aún notas almacenadas
-  if (!agenda) {
-    agenda = [];
-  }
-  agenda = ordenarAgenda(indice);
-  //Genero el contenido de la tabla
-  let tabla = "";
-  for (let index = 0; index < agenda.length; index++) {
-    let agen = agenda[index];
-    if (agenda[index].fecha.split(" ")[0] == "Mon") {
-      agen.fecha = "Lunes" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-    }
-    if (agenda[index].fecha.split(" ")[0] == "Tue") {
-      agen.fecha = "Martes" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-    }
-    if (agenda[index].fecha.split(" ")[0] == "Wed") {
-      agen.fecha = "Miercoles" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-    }
-    if (agenda[index].fecha.split(" ")[0] == "Thu") {
-      agen.fecha = "Jueves" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-    }
-    if (agenda[index].fecha.split(" ")[0] == "Fri") {
-      agen.fecha = "Viernes" + " " + agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-    }
-
-    tabla += `<tr><td class="text-justify">${agen.fecha}</td><td>${agen.clase}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
-  }
-
-  //Muestro el contenido de la tabla
-  document.getElementById('tablaAgenda').innerHTML = tabla;
 }
 
 function ordenarAgenda(indice) {
