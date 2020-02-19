@@ -60,26 +60,27 @@ function cancelarReserva(usuarioActivo, i) {
 
     let agenda = JSON.parse(localStorage.getItem('agenda'))
 
-    for (let index = 0; index < agenda[i].reservado.length; index++) {
-        const element = agenda[i].reservado[index];
-
-        if (element == usuarioActivo) {
-
-            console.log(element)
-            console.log(usuarioActivo)
-
-            agenda[i].reservado.splice(index, 1)
-            console.log(agenda)
-
-
-            localStorage.setItem('agenda', JSON.stringify(agenda));
-
-            listarClasesDisponibles()
-
-
+    if (confirm("Desea cancelar el turno?")) {
+        for (let index = 0; index < agenda[i].reservado.length; index++) {
+            const element = agenda[i].reservado[index];
+    
+            if (element == usuarioActivo) {
+    
+                console.log(element)
+                console.log(usuarioActivo)
+    
+                agenda[i].reservado.splice(index, 1)
+                console.log(agenda)
+    
+    
+                localStorage.setItem('agenda', JSON.stringify(agenda));
+    
+                listarClasesDisponibles()
+            }
         }
-
+        alert("Su turno ha sido cancelado")
     }
+    
 
 
 
