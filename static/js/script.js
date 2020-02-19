@@ -170,7 +170,7 @@ function listarClases() {
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
                                 <a href="" onclick="eliminarClase('${clase.nombre}')" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash"></i></a>
+                                        class="fas fa-trash text-white"></i></a>
                             </td>
         `
 
@@ -215,14 +215,17 @@ function editarClase(id) {
 function guardarClaseEditada(id) {
 
     event.preventDefault()
-    let nombre = document.getElementById("c" + id).value
+    let nombre = document.getElementById("c" + id).value.toUpperCase();
     let clases = JSON.parse(localStorage.getItem('clases'));
     let index = clases.findIndex(c => c.id == id);
 
-    let indexClase = clases.find(c => c.nombre == nombre)
+    let indexClase = clases.find(c => c.nombre.toUpperCase() == nombre)
     if (indexClase) {
-        alert("clase ya existe")
-    } else {
+        if(clases[index].nombre.toUpperCase() == nombre){
+            listarClases();
+        } else{
+        alert("clase ya existe");
+    }} else {
         clases[index].nombre = nombre;
 
         localStorage.setItem('clases', JSON.stringify(clases));
