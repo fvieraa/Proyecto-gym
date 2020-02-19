@@ -328,7 +328,8 @@ function listarEntradas(indice) {
       }
 
       if (clase.nombre == agen.clase) {
-        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.turno}</td><td><button class= 'btn btn-success' data-target='#modalInscriptos' data-toggle="modal" onClick= 'mostrarInscriptos(${agenda[index].id})'>${agen.cupo - agenda[index].reservado.length}</button> </td>`;
+        botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.turno}</td><td><button class= 'btn btn-success' data-target='#modalInscriptos' data-toggle="modal" 
+        onClick=mostrarInscriptos('${agenda[index].id}')>${agen.cupo - agenda[index].reservado.length}</button> </td>`;
         
       }
 
@@ -375,6 +376,7 @@ function ordenarAgenda(indice) {
 
   return agendaOrdenada;
 }
+
 
 function mostrarInscriptos(id){
 let tabla = document.getElementById('tablaInscriptos')

@@ -55,7 +55,7 @@ function listarClasesDisponibles() {
         document.getElementById('ClasesDisponibles').innerHTML = tablaBody;
     } else {
 
-        tablaBody += '<tr><td><h1>NO ESTAS HABILITADO PARA INSCRIBIRTE A LAS CLASES</h1></td></tr>'
+        tablaBody += '<tr><td><h1>PAGA AMIGO!</h1></td></tr>'
 
 
         document.getElementById('ClasesDisponibles').innerHTML = tablaBody;
