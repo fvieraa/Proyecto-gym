@@ -1,8 +1,18 @@
+function generarId(length) {
+    var id = '';
+    var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var caracteresLength = caracteres.length;
+    for (var i = 0; i < length; i++) {
+        id += caracteres.charAt(Math.floor(Math.random() * caracteresLength));
+    }
+    return id;
+}
+
 class Usuario {
 
-    constructor(id, nombre, dni, usuario, password) {
+    constructor(nombre, dni, usuario, password) {
 
-        this.id = id
+        this.id = generarId(10)
         this.nombre = nombre;
         this.dni = dni;
         this.usuario = usuario;
@@ -12,8 +22,8 @@ class Usuario {
 }
 
 class Clase {
-    constructor(id, nombre) {
-        this.id = id
+    constructor(nombre) {
+        this.id = generarId(5)
         this.nombre = nombre;
     }
 }
@@ -30,20 +40,20 @@ class Sesion {
 
 function verSesiones() {
     // let a = sesiones.find(adm => adm.id == s)
-    
-    
-    
+
+
+
     let sesiones = JSON.parse(localStorage.getItem('sesiones'))
 
-    
-    let usuario = " " 
-    
+
+    let usuario = " "
+
     usuario += ` <i class="fas fa-user"></i>  `
     usuario += sesiones[0].usuario
     document.getElementById('dropdownMenuLink').innerHTML = usuario;
 
 
-    
+
     console.log()
 
 }
@@ -60,11 +70,11 @@ function logeo() {
 
             window.location.href = "index-admin.html";
 
-            let sesiones = []
-            let nuevaSesion = new Sesion(0,
-                "admin", true)
-            sesiones.push(nuevaSesion)
-            localStorage.setItem('sesiones', JSON.stringify(sesiones));
+            // let sesiones = []
+            // let nuevaSesion = new Sesion(0,
+            //     "admin", true)
+            // sesiones.push(nuevaSesion)
+            // localStorage.setItem('sesiones', JSON.stringify(sesiones));
 
 
         } else {
@@ -83,12 +93,12 @@ function logeo() {
 
             } else {
                 window.location.href = "index-user.html";
-            let usuarioSesionAbierta = usuarios.find(u => (u.usuario == usuario))
-            let sesiones = []
-            let nuevaSesion = new Sesion(usuarioSesionAbierta.id,
-                usuarioSesionAbierta.usuario,usuarioSesionAbierta.estado, false)
-            sesiones.push(nuevaSesion)
-            localStorage.setItem('sesiones', JSON.stringify(sesiones));
+                let usuarioSesionAbierta = usuarios.find(u => (u.usuario == usuario))
+                let sesiones = []
+                let nuevaSesion = new Sesion(usuarioSesionAbierta.id,
+                    usuarioSesionAbierta.usuario, usuarioSesionAbierta.estado, false)
+                sesiones.push(nuevaSesion)
+                localStorage.setItem('sesiones', JSON.stringify(sesiones));
             }
 
         }
@@ -119,7 +129,6 @@ function agregarClase() {
             clases = []
         };
         let nuevaClase = new Clase(
-            id = clases.length + 1,
             nombre.value
         );
 
@@ -156,11 +165,10 @@ function listarClases() {
         tabla += `<tr><td id="clase${clase.id}">${clase.nombre}</td>`;
         tabla += `
         <td id="botonesClases${clase.id}" class="center btn-group footable-visible footable-last-column">
-                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
-                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="editarClase(${clase.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                
+                                <a href="" onclick="editarClase('${clase.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a href="" onclick="eliminarClase('${clase.nombre}')" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
                                         class="fa fa-trash"></i></a>
                             </td>
@@ -190,14 +198,12 @@ function editarClase(id) {
     tabla += `<tr><td ><input id="c${clase.id}" value="${clase.nombre}"> </td>`;
     tabla += `
         <td class="center btn-group footable-visible footable-last-column">
-                                <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
-                                    title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="guardarClaseEditada('${clase.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
-                                    title="" data-original-title="Editar"><i class="fa fa-edit"></i> guardar</a>
-                                <a onclick="listarClases()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
-                                    data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o"></i>Cancelar</a>
-                            </td></tr>
+            <a data-status="1" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
+            <a href="" onclick="guardarClaseEditada('${clase.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar"><i class="fa fa-edit"></i> guardar</a>
+            <a href=""  class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                data-placement="top" title="" data-original-title="Borrar"><i class="fas fa-ban"></i>Cancelar</a>
+        </td>
         `
 
 
@@ -224,6 +230,68 @@ function guardarClaseEditada(id) {
     }
 }
 
+function eliminarClase(nombreClase) {
+    event.preventDefault()
+    if(!confirm("Estas Seguro?")) return
+    let agenda = JSON.parse(localStorage.getItem('agenda'))
+    let bandera = false
+    let clases = agenda.filter(c => {
+        if (c.clase == nombreClase && c.reservado.length) bandera = true
+        return c.clase != nombreClase
+    })
+
+    if (bandera) {
+        alert("No puedes eliminar, asegurate de cancelar las reservas activas de esta clase!")
+        return
+    }
+    localStorage.setItem('agenda', JSON.stringify(clases))
+
+    let actividades = JSON.parse(localStorage.getItem('clases'))
+    let indceActividad = actividades.findIndex(a => a.nombre == nombreClase)
+    actividades.splice(indceActividad,1)
+
+    localStorage.setItem('clases', JSON.stringify(actividades))
+    listarClases()
+
+
+
+
+
+
+    // let eliminar = agenda.filter(c => c.clase != nombreClase)
+    // console.log(clases);
+
+
+    // for (let index = 0; index < clases.length; index++) {
+    //     const actividad = clases[index];
+
+    //     if (actividad.reservado.length) {
+
+    //         console.log(actividad.reservado)
+    //     } else {
+    //         console.log(eliminar);
+
+
+
+
+
+    //     }
+    // }
+    //   let usuarios = JSON.parse(localStorage.getItem('usuarios'));
+    //   let index = usuarios.findIndex(c => c.id == codigo);
+
+    //   if (confirm("¿Desea eliminar Usuario?")) {
+
+    //       usuarios.splice(index, 1)
+    //       console.log(usuarios)
+    //       localStorage.setItem('usuarios',JSON.stringify(usuarios))
+    //       listarUsuarios();
+
+    //   }
+
+
+}
+
 function agregarUsuario() {
     event.preventDefault();
     let nombre = document.getElementById('agregarNombreUsuario');
@@ -241,7 +309,6 @@ function agregarUsuario() {
                     usuarios = []
                 };
                 let nuevoUsuario = new Usuario(
-                    id = usuarios.length + 1,
                     nombre.value,
                     dni.value,
                     usuario.value,
@@ -297,11 +364,11 @@ function listarUsuarios() {
             tabla += `<tr id="fila${usuario.id}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
             tabla += `
             <td class="center btn-group footable-visible footable-last-column">
-                                    <a data-status="1" onclick="suspensionUsuario(${usuario.id})" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                    <a data-status="1" onclick="suspensionUsuario('${usuario.id}')" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                         title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                    <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    <a href="" onclick="editarUsuario('${usuario.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                    <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger" role="button" data-toggle="tooltip"
+                                    <a href="" onclick="eliminarUsuario('${usuario.id}')" class="btn btn-danger" role="button" data-toggle="tooltip"
                                         data-placement="top" title="" data-original-title="Borrar"><i
                                             class="fa fa-trash"></i></a>
                                 </td></tr>
@@ -310,11 +377,11 @@ function listarUsuarios() {
             tabla += `<tr id="fila${usuario.id}"><td>${usuario.nombre}</td><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
             tabla += `
             <td class="center btn-group footable-visible footable-last-column">
-                                    <a data-status="1" onclick="suspensionUsuario(${usuario.id})" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                    <a data-status="1" onclick="suspensionUsuario('${usuario.id}')" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                         title="" data-original-title="Acceso"><i class="fa fa-circle text-danger"></i></a>
-                                    <a href="" onclick="editarUsuario(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                    <a href="" onclick="editarUsuario('${usuario.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Editar"><i class="fa fa-edit"></i></a>
-                                    <a onclick="eliminarUsuario(${usuario.id})" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                    <a href="" onclick="eliminarUsuario('${usuario.id}')" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                         data-placement="top" title="" data-original-title="Borrar"><i
                                             class="fa fa-trash"></i></a>
                                 </td></tr>
@@ -342,13 +409,14 @@ function editarUsuario(codigo) {
     tabla += `<tr id="f${usuario.id}"><td><input id="${usuario.id}" value="${usuario.nombre}"><td>${usuario.usuario}</td><td>${usuario.dni}</td>`;
     tabla += `
         <td class="center btn-group footable-visible footable-last-column">
-                                <a data-status="1" onclick="suspensionUsuario(${usuario.id})" class="btn btn-default moderate" role="button" data-toggle="tooltip"
+                                <a data-status="1" onclick="suspensionUsuario('${usuario.id}')" class="btn btn-default moderate" role="button" data-toggle="tooltip"
                                     title="" data-original-title="Acceso"><i class="fa fa-circle text-success"></i></a>
-                                <a href="" onclick="guardarUsuarioEditado(${usuario.id})" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
+                                <a href="" onclick="guardarUsuarioEditado('${usuario.id}')" class="btn btn-info" role="button" data-toggle="tooltip" data-placement="top"
                                     title="" data-original-title="Editar"><i class="fa fa-edit"></i>Aceptar</a>
-                                <a onclick="listarUsuarios()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
+                                <a href="" onclick="listarUsuarios()" class="btn btn-danger delete" role="button" data-toggle="tooltip"
                                     data-placement="top" title="" data-original-title="Borrar"><i
-                                        class="fa fa-trash-o"></i>Cancelar</a>
+                                        class="fas fa-ban"></i>Cancelar</a>
+                                        
                             </td></tr>
         `
 
@@ -369,134 +437,136 @@ function guardarUsuarioEditado(codigo) {
     } else {
         listarUsuarios()
     }
-        
-    
+
+
 }
 
 function eliminarUsuario(codigo) {
 
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
     let index = usuarios.findIndex(c => c.id == codigo);
-    console.log(index);
-    console.log(usuarios)
 
     if (confirm("¿Desea eliminar Usuario?")) {
 
         usuarios.splice(index, 1)
         console.log(usuarios)
-        localStorage.setItem('usuarios',JSON.stringify(usuarios))
+        localStorage.setItem('usuarios', JSON.stringify(usuarios))
         listarUsuarios();
-        
+
     }
 }
 
 function suspensionUsuario(codigo) {
-    
+
     event.preventDefault()
 
     let usuarios = JSON.parse(localStorage.getItem("usuarios"))
     let idUsuarios = usuarios.findIndex(u => u.id == codigo);
     let usuario = usuarios[idUsuarios];
-    
+
     if (usuario.estado) {
-        
-        confirm("¿Desea suspender el usuario?")
-        usuario.estado = false;
-        localStorage.setItem('usuarios',JSON.stringify(usuarios))
-        listarUsuarios()
+
+        if (confirm("¿Desea suspender el usuario?")) {
+
+            usuario.estado = false;
+            localStorage.setItem('usuarios', JSON.stringify(usuarios))
+            listarUsuarios()
+        }
 
     } else {
-        confirm("¿Desea habilitar el usuario?")
-        usuario.estado = true;
-        localStorage.setItem('usuarios',JSON.stringify(usuarios))
-        listarUsuarios()
+        if (confirm("¿Desea habilitar el usuario?")) {
+
+            usuario.estado = true;
+            localStorage.setItem('usuarios', JSON.stringify(usuarios))
+            listarUsuarios()
+        }
     }
 
 
 
-    
+
 
 
 }
 
-function cambiarPassword(){
+function cambiarPassword() {
     let sesiones = JSON.parse(localStorage.getItem('sesiones'))
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
-    if(!usuarios){
+    if (!usuarios) {
         usuarios = [];
     }
     let usuarioActivo = usuarios.find(u => (u.id == sesiones[0].id))
     // console.log(usuarioActivo);    
-    if(usuarioActivo.password == usuarioActivo.usuario){
+    if (usuarioActivo.password == usuarioActivo.usuario) {
         $('#modalCambiarPassword').modal('show');
     }
 }
 
-function guardarNuevoPassword(){
+function guardarNuevoPassword() {
     let nuevoPassword = document.getElementById('nuevaClave').value;
     let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave').value;
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
     let sesiones = JSON.parse(localStorage.getItem('sesiones'));
     for (let index = 0; index < usuarios.length; index++) {
-        
-        if(sesiones[0].id == usuarios[index].id){
-            if(confirmaNuevoPassword == nuevoPassword){
-                if(usuarios[index].usuario == nuevoPassword){
+
+        if (sesiones[0].id == usuarios[index].id) {
+            if (confirmaNuevoPassword == nuevoPassword) {
+                if (usuarios[index].usuario == nuevoPassword) {
                     alert('La clave no puede ser igual al nombre de usuario');
                     document.getElementById('nuevaClave').value = '';
                     document.getElementById('confirmaNuevaClave').value = '';
-                }else if(nuevoPassword == ''){
+                } else if (nuevoPassword == '') {
                     alert('Debe ingresar una clave');
                     document.getElementById('nuevaClave').value = '';
                     document.getElementById('confirmaNuevaClave').value = '';
-                }else {
+                } else {
                     usuarios[index].password = nuevoPassword;
                     localStorage.setItem('usuarios', JSON.stringify(usuarios));
                     document.getElementById('nuevaClave').value = '';
                     $('#modalCambiarPassword').modal('hide');
                 }
-            } else{
+            } else {
                 alert('Las clave y su confirmacion son diferentes');
                 document.getElementById('nuevaClave').value = '';
                 document.getElementById('confirmaNuevaClave').value = '';
-                
-            }   
-        } 
+
+            }
+        }
     }
 }
 
-function verClave(){
+function verClave() {
     let verClave = document.getElementById('mostrarClave').checked;
-    if(verClave){
+    if (verClave) {
         let nuevoPassword = document.getElementById('nuevaClave');
         let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave');
-        nuevoPassword.setAttribute('type','text');
-        confirmaNuevoPassword.setAttribute('type','text');
-        
-    }else{
+        nuevoPassword.setAttribute('type', 'text');
+        confirmaNuevoPassword.setAttribute('type', 'text');
+
+    } else {
         let nuevoPassword = document.getElementById('nuevaClave');
         let confirmaNuevoPassword = document.getElementById('confirmaNuevaClave');
-        nuevoPassword.setAttribute('type','password');
-        confirmaNuevoPassword.setAttribute('type','password');
-        
+        nuevoPassword.setAttribute('type', 'password');
+        confirmaNuevoPassword.setAttribute('type', 'password');
+
     }
-    
+
 }
 
-function cerrarModalCambioClave(){
+function cerrarModalCambioClave() {
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
     let sesiones = JSON.parse(localStorage.getItem('sesiones'));
     for (let index = 0; index < usuarios.length; index++) {
-        
-        if(sesiones[0].id == usuarios[index].id){
-            if(usuarios[index].usuario == usuarios[index].password){
+
+        if (sesiones[0].id == usuarios[index].id) {
+            if (usuarios[index].usuario == usuarios[index].password) {
                 alert('Debes cambiar la clave')
-            }else{
-    
-            document.getElementById('nuevaClave').value = '';
-            document.getElementById('confirmaNuevaClave').value = '';
-            document.getElementById('mostrarClave').checked = false;
-            $('#modalCambiarPassword').modal('hide');
+            } else {
+
+                document.getElementById('nuevaClave').value = '';
+                document.getElementById('confirmaNuevaClave').value = '';
+                document.getElementById('mostrarClave').checked = false;
+                $('#modalCambiarPassword').modal('hide');
             }
         }
     }

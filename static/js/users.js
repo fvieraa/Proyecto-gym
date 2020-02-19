@@ -18,12 +18,20 @@ function listarClasesDisponibles() {
 
             let actividad = agenda[i];
             let newFecha = new Date(actividad.fecha);
+            let reservado = false
+            if (actividad.reservado.length) {
+                let encontrado = actividad.reservado.find(e => e == usuarioActivo)
+                if(encontrado){
+                    reservado= true
+                    
 
+                }
+            }
 
 
             if ((dia == moment(newFecha).date()) && (mes == moment(newFecha).month()) && (anio == moment(newFecha).year())) {
 
-                if (usuarioActivo == actividad.reservado) {
+                if (reservado) {
                     tablaBody += `<tr>
                 <th scope="row">${actividad.clase}</th>
                 <td>${nombres_dias[newFecha.getDay()]} ${newFecha.getDate()} de ${nombres_meses[newFecha.getMonth()]} de ${newFecha.getFullYear()} </td>
@@ -45,7 +53,7 @@ function listarClasesDisponibles() {
         }
 
         document.getElementById('ClasesDisponibles').innerHTML = tablaBody;
-    } else{
+    } else {
 
         tablaBody += '<tr><td><h1>NO ESTAS HABILITADO PARA INSCRIBIRTE A LAS CLASES</h1></td></tr>'
 
@@ -65,11 +73,7 @@ function cancelarReserva(usuarioActivo, i) {
 
         if (element == usuarioActivo) {
 
-            console.log(element)
-            console.log(usuarioActivo)
-
             agenda[i].reservado.splice(index, 1)
-            console.log(agenda)
 
 
             localStorage.setItem('agenda', JSON.stringify(agenda));
@@ -82,22 +86,15 @@ function cancelarReserva(usuarioActivo, i) {
     }
 
 
-
-
 }
 function reservarClase(fechaClase, turnoClase, Clase) {
 
-    console.log(Clase);
     let agenda = JSON.parse(localStorage.getItem('agenda'))
     let sesiones = JSON.parse(localStorage.getItem('sesiones'))
     let indiceClase = agenda.findIndex(f => (moment(f.fecha).format('YYYYMMDD') == moment(fechaClase).format('YYYYMMDD')) && (f.turno == turnoClase) && (f.clase == Clase))
-    console.log(indiceClase);
     let reservas = agenda[indiceClase].reservado
-    console.log(reservas);
     let usuarioSesionado = sesiones[0].usuario
-    console.log(usuarioSesionado);
     let usuarioConReserva = agenda[indiceClase].reservado.find(f => f == usuarioSesionado)
-    console.log(usuarioConReserva);
 
     if (usuarioSesionado != usuarioConReserva) {
         if ((reservas.length < agenda[indiceClase].cupo)) {

@@ -1,5 +1,16 @@
+function generarId(length) {
+  var id = '';
+  var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var caracteresLength = caracteres.length;
+  for (var i = 0; i < length; i++) {
+      id += caracteres.charAt(Math.floor(Math.random() * caracteresLength));
+  }
+  return id;
+}
+
 class Agenda {
   constructor(fecha, turno, clase, cupo) {
+    this.id = generarId(10);
     this.fecha = fecha;
     this.turno = turno;
     this.clase = clase;
@@ -47,7 +58,6 @@ function cargar() {
   if (!agenda) {
     agenda = []
   };
-  console.log(agenda)
 
   /* Definir las variables true para cada dia */
   let lunes = document.getElementById('lunes').checked;
@@ -72,15 +82,13 @@ function cargar() {
 
     let turno = document.getElementById('optionTurno').value;
     let cont = 0
-    console.log(agenda)
     agenda.forEach(element => {
       if ((element.fecha.split(" ")[0] == "Mon") && (element.turno == turno)) {
         cont = cont + 1
       }
     })
-    console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 1;
+    let cupo = 10;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -107,15 +115,13 @@ function cargar() {
 
     let turno = document.getElementById('optionTurno').value;
     let cont = 0
-    console.log(agenda)
     agenda.forEach(element => {
       if ((element.fecha.split(" ")[0] == "Tue") && (element.turno == turno)) {
         cont = cont + 1
       }
     })
-    console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 1;
+    let cupo = 10;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -126,7 +132,7 @@ function cargar() {
           fecha, turno, clase, cupo)
 
         if (cont >= 3) {
-          console.log("ya hay algo en esa fecha y horario")
+          alert("ya hay algo en esa fecha y horario")
         } else {
 
           agenda.push(nuevaEntrada);
@@ -140,15 +146,13 @@ function cargar() {
 
     let turno = document.getElementById('optionTurno').value;
     let cont = 0
-    console.log(agenda)
     agenda.forEach(element => {
       if ((element.fecha.split(" ")[0] == "Wed") && (element.turno == turno)) {
         cont = cont + 1
       }
     })
-    console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 1;
+    let cupo = 10;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -159,7 +163,7 @@ function cargar() {
           fecha, turno, clase, cupo)
 
         if (cont >= 3) {
-          console.log("ya hay algo en esa fecha y horario")
+          alert("ya hay algo en esa fecha y horario")
         } else {
 
           agenda.push(nuevaEntrada);
@@ -173,15 +177,13 @@ function cargar() {
 
     let turno = document.getElementById('optionTurno').value;
     let cont = 0
-    console.log(agenda)
     agenda.forEach(element => {
       if ((element.fecha.split(" ")[0] == "Thu") && (element.turno == turno)) {
         cont = cont + 1
       }
     })
-    console.log("contador", cont)
     let clase = document.getElementById('optionClases').value;
-    let cupo = 1;
+    let cupo = 10;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -192,11 +194,11 @@ function cargar() {
           fecha, turno, clase, cupo)
 
         if (cont >= 3) {
-          console.log("ya hay algo en esa fecha y horario")
-        } else {
+          alert("ya hay algo en esa fecha y horario")
+          return
+        }
 
           agenda.push(nuevaEntrada);
-        }
       }
     }
     localStorage.setItem('agenda', JSON.stringify(agenda));
@@ -206,14 +208,13 @@ function cargar() {
 
     let turno = document.getElementById('optionTurno').value;
     let cont = 0
-    console.log(agenda)
     agenda.forEach(element => {
       if ((element.fecha.split(" ")[0] == "Fri") && (element.turno == turno)) {
         cont = cont + 1
       }
     })
     let clase = document.getElementById('optionClases').value;
-    let cupo = 1;
+    let cupo = 10;
     let nuevaEntrada = []
     for (let index = 0; index < mes.length; index++) {
       const element = mes[index].split(" ")[0];
@@ -224,7 +225,7 @@ function cargar() {
           fecha, turno, clase, cupo)
 
         if (cont >= 3) {
-          console.log("ya hay algo en esa fecha y horario")
+          alert("ya hay algo en esa fecha y horario")
         } else {
 
           agenda.push(nuevaEntrada);
@@ -273,15 +274,12 @@ function agregarClase() {
 function listarEntradas(indice) {
 
   let agenda = JSON.parse(localStorage.getItem('agenda'));
-  agenda = ordenarAgenda(indice);
 
   let clases = JSON.parse(localStorage.getItem('clases'));
-  // console.log(clases)
   let botonCollapse = ""
-  
+
   for (let index = 0; index < clases.length; index++) {
     const clase = clases[index];
-    // console.log(clase)
 
 
     botonCollapse += `
@@ -294,7 +292,7 @@ function listarEntradas(indice) {
     <table class="table table-sm-responsive table-borderless text-left font-weight-bold text-uppercase bg-white text-success mt-3">
     <thead class="thead-light">
     <tr><th>${clase.nombre}</th></tr>
-    <th scope="col">Dia</th>
+    <th scope="col" >Dia</th>
     <th scope="col">Fecha</th>
     <th scope="col">Turno</th>
                 <th scope="col">Cupo</th>
@@ -303,36 +301,35 @@ function listarEntradas(indice) {
     `
     for (let index = 0; index < agenda.length; index++) {
       const agen = agenda[index];
-      
-      // console.log(clase)
+
       if (agenda[index].fecha.split(" ")[0] == "Mon") {
-        agen.dia = "Lunes" + " " 
+        agen.dia = "Lunes" + " "
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
       }
       if (agenda[index].fecha.split(" ")[0] == "Tue") {
-        agen.dia = "Martes" + " " 
+        agen.dia = "Martes" + " "
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-        
+
       }
       if (agenda[index].fecha.split(" ")[0] == "Wed") {
-        agen.dia = "Miercoles" + " " 
+        agen.dia = "Miercoles" + " "
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-        
+
       }
       if (agenda[index].fecha.split(" ")[0] == "Thu") {
-        agen.dia = "Jueves" + " " 
+        agen.dia = "Jueves" + " "
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-        
+
       }
       if (agenda[index].fecha.split(" ")[0] == "Fri") {
-        agen.dia = "Viernes" + " " 
+        agen.dia = "Viernes" + " "
         agen.fecha = agenda[index].fecha.split(" ")[2] + " " + agenda[index].fecha.split(" ")[1]
-        
+
       }
-      
+
       if (clase.nombre == agen.clase) {
         botonCollapse += `<tr><td class="text-justify">${agen.dia}</td><td>${agen.fecha}</td><td>${agen.turno}</td><td>${agen.cupo}</td>`;
-        
+
       }
 
     }
@@ -344,37 +341,37 @@ function listarEntradas(indice) {
 
 }
 
-function ordenarAgenda(indice) {
-  let agenda = JSON.parse(localStorage.getItem('agenda'));
-  let agendaOrdenada;
-  if (indice == 1) {
-    agendaOrdenada = agenda.sort(function (a, b) {
-      if (new Date(a.fecha).getDate() != new Date(b.fecha).getDate()) {
-        if ((new Date(a.fecha)) < (new Date(b.fecha))) {
-          return -1;
-        } else {
-          return 1;
-        }
-      } else if (a.turno < b.turno) {
-        return -1
-      }
-      else if (a.turno > b.turno) {
-        return 1
-      } else {
-        return 0
-      }
-    })
-  } else {
-    agendaOrdenada = agenda.sort(function (a, b) {
-      if (a.clase < b.clase) {
-        return -1;
-      } else if (a.clase > b.clase) {
-        return 1;
-      } else {
-        return 0;
-      }
-    })
-  }
+// function ordenarAgenda(indice) {
+//   let agenda = JSON.parse(localStorage.getItem('agenda'));
+//   let agendaOrdenada;
+//   if (indice == 1) {
+//     agendaOrdenada = agenda.sort(function (a, b) {
+//       if (new Date(a.fecha).getDate() != new Date(b.fecha).getDate()) {
+//         if ((new Date(a.fecha)) < (new Date(b.fecha))) {
+//           return -1;
+//         } else {
+//           return 1;
+//         }
+//       } else if (a.turno < b.turno) {
+//         return -1
+//       }
+//       else if (a.turno > b.turno) {
+//         return 1
+//       } else {
+//         return 0
+//       }
+//     })
+//   } else {
+//     agendaOrdenada = agenda.sort(function (a, b) {
+//       if (a.clase < b.clase) {
+//         return -1;
+//       } else if (a.clase > b.clase) {
+//         return 1;
+//       } else {
+//         return 0;
+//       }
+//     })
+//   }
 
-  return agendaOrdenada;
-}
+//   return agendaOrdenada;
+// }
