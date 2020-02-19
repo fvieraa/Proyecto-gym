@@ -82,7 +82,7 @@ function cancelarReserva(usuarioActivo, i) {
 
 
         }
-        alert("Su turno ha sido cancelado")
+        // alert("Su turno ha sido cancelado")
     }
     
 
